@@ -8,12 +8,25 @@ public class ShootEffects : MonoBehaviour
     private AudioSource shootSounds;
     private Transform shootShake;
     private ParticleSystem shootParticle;
+    public FloatVariable loadingProgress;
 
     private void Start()
     {
         shootSounds = GetComponent<AudioSource>();
         shootShake = GetComponent<Transform>();
         shootParticle = GetComponentInChildren<ParticleSystem>();
+        SceneLoader.StartedLoading += ShowLoadingProgressBar;
+        SceneLoader.ProgressUpdated += UpdateFillAmount;
+    }
+
+    public void ShowLoadingProgressBar()
+    {
+
+    }
+
+    public void UpdateFillAmount(float currentProgress)
+    {
+
     }
 
     public void ShootAudio()
