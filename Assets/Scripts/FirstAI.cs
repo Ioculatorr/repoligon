@@ -62,6 +62,8 @@ public class EnemyAIWithShooting : MonoBehaviour
 
         // Apply force to the bullet to make it move
         bulletRb.velocity = shootingDirection * bulletSpeed;
+
+        Destroy(bullet, 2f);
     }
 
 
