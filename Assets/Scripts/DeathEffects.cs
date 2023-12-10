@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class DeathEffects : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private AudioSource deathSounds;
+
+    private void Start()
     {
-        
+        deathSounds = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void deathSound()
     {
-        
+        deathSounds.Play();
     }
 }

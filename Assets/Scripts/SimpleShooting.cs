@@ -7,8 +7,12 @@ public class SimpleShooting : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootingPoint;
-    [SerializeField] private float bulletSpeed = 100f;
+    [SerializeField] private Transform shootingPointRaycast;
+    //[SerializeField] private float bulletSpeed = 100f;
     [SerializeField] private float fireRate = 10f; // bullets per second
+    [SerializeField] private ParticleSystem hitParticlePrefab;
+
+    [SerializeField] private LayerMask ignoreLayers; // Layers to be ignored by the raycast
 
     private float nextFireTime = 0f;
 
@@ -24,37 +28,93 @@ public class SimpleShooting : MonoBehaviour
         }
     }
 
+    //void Shoot()
+    //{
+    //    // Create a new bullet instance
+    //    GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+
+    //    // Access the Rigidbody component of the bullet
+    //    Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+
+    //    // Apply force to the bullet to make it move
+    //    bulletRb.velocity = shootingPoint.forward * bulletSpeed;
+
+    //    myShootTrigger.Invoke();
+
+
+
+    //    // Destroy the bullet after a certain time (adjust as needed)
+    //    Destroy(bullet, 2f);
+
+    //    StartCoroutine(CheckBulletVelocity(bullet));
+    //}
+
+    //IEnumerator CheckBulletVelocity(GameObject bullet)
+    //{
+    //    // Wait for a short delay (adjust as needed)
+    //    yield return new WaitForSeconds(0.05f);
+
+    //    // Check if the magnitude of the velocity is less than a certain threshold
+    //    if (bullet.GetComponent<Rigidbody>().velocity.magnitude < 90f)
+    //    {
+    //        // Destroy the bullet gameObject
+    //        Destroy(bullet);
+    //    }
+    //}
+
     void Shoot()
     {
-        // Create a new bullet instance
-        GameObject bullet = Instantiate(bulletPrefab, shootingPoint.position, shootingPoint.rotation);
+        // Cast a ray from the shooting point forward
+        Ray ray = new Ray(shootingPointRaycast.position, shootingPointRaycast.forward);
 
-        // Access the Rigidbody component of the bullet
-        Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
+        // Use a large distance for the raycast (adjust as needed)
+        float maxRaycastDistance = 1000f;
 
-        // Apply force to the bullet to make it move
-        bulletRb.velocity = shootingPoint.forward * bulletSpeed;
+        // Check if the ray hits something
+        if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance, ~ignoreLayers))
+        {
+            // Access the hit point
+            Vector3 hitPoint = hit.point;
 
-        myShootTrigger.Invoke();
+            // Spawn a particle effect at the hit point
+            SpawnHitParticle(hitPoint);
 
+            // Access the hit object
+            GameObject hitObject = hit.collider.gameObject;
 
+            // Check if the hit object has the EnemyDetection script
+            EnemyAIWithShooting enemyDetection = hitObject.GetComponent<EnemyAIWithShooting>();
+            if (enemyDetection != null)
+            {
+                // Call the OnRaycastHit method on the enemy
+                enemyDetection.OnRaycastHit();
+            }
 
-        // Destroy the bullet after a certain time (adjust as needed)
-        Destroy(bullet, 2f);
+            // Invoke the shoot trigger event
+            myShootTrigger.Invoke();
+        }
+        else
+        {
+            // If the ray doesn't hit anything, consider it as hitting the skybox
+            Debug.Log("Hit: Nothing!");
 
-        StartCoroutine(CheckBulletVelocity(bullet));
+            // Invoke the shoot trigger event
+            myShootTrigger.Invoke();
+        }
+
+        // Visualize the ray in the Scene view (for debugging purposes)
+        Debug.DrawRay(ray.origin, ray.direction * maxRaycastDistance, Color.red, 0.1f);
     }
 
-    IEnumerator CheckBulletVelocity(GameObject bullet)
+    void SpawnHitParticle(Vector3 position)
     {
-        // Wait for a short delay (adjust as needed)
-        yield return new WaitForSeconds(0.05f);
+        // Instantiate the particle effect prefab at the hit position
+        ParticleSystem hitParticle = Instantiate(hitParticlePrefab, position, Quaternion.identity);
 
-        // Check if the magnitude of the velocity is less than a certain threshold
-        if (bullet.GetComponent<Rigidbody>().velocity.magnitude < 90f)
-        {
-            // Destroy the bullet gameObject
-            Destroy(bullet);
-        }
+        // Play the particle effect
+        hitParticle.Emit(1);
+
+        // Destroy the particle effect after its duration (adjust as needed)
+        Destroy(hitParticle.gameObject, hitParticle.main.duration);
     }
 }

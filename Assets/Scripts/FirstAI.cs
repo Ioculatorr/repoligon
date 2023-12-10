@@ -75,12 +75,17 @@ public class EnemyAIWithShooting : MonoBehaviour
         return distanceToPlayer < sightRange;
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.layer == 9)
+    //    {
+    //        this.gameObject.GetComponent<AudioSource>().Play();
+    //        //Destroy(gameObject);
+    //    }
+    //}
+
+    public void OnRaycastHit()
     {
-        if(other.gameObject.layer == 9)
-        {
-            this.gameObject.GetComponent<AudioSource>().Play();
-            //Destroy(gameObject);
-        }
+        this.gameObject.GetComponent<AudioSource>().Play();
     }
 }
