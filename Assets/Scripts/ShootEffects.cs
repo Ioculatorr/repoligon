@@ -31,6 +31,6 @@ public class ShootEffects : MonoBehaviour
     }
     public void ShootParticle()
     {
-        shootParticle.Play();
+        shootParticle.Emit(1);
     }
 }

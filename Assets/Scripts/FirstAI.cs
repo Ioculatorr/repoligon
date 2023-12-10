@@ -74,4 +74,13 @@ public class EnemyAIWithShooting : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         return distanceToPlayer < sightRange;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 9)
+        {
+            this.gameObject.GetComponent<AudioSource>().Play();
+            //Destroy(gameObject);
+        }
+    }
 }
