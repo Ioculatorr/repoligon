@@ -12,8 +12,6 @@ public class SimpleShooting : MonoBehaviour
     [SerializeField] private float fireRate = 10f; // bullets per second
     [SerializeField] private ParticleSystem hitParticlePrefab;
 
-    [SerializeField] private LayerMask ignoreLayers; // Layers to be ignored by the raycast
-
     private float nextFireTime = 0f;
 
     [SerializeField] private UnityEvent myShootTrigger;
@@ -71,7 +69,7 @@ public class SimpleShooting : MonoBehaviour
         float maxRaycastDistance = 1000f;
 
         // Check if the ray hits something
-        if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance, ~ignoreLayers))
+        if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance))
         {
             // Access the hit point
             Vector3 hitPoint = hit.point;
