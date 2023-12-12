@@ -27,7 +27,7 @@ public class EnemyAIWithShooting : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         // Use Gizmos to visualize the sight range
         Gizmos.color = Color.yellow;
