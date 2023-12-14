@@ -14,12 +14,9 @@ public class DialogueManager : MonoBehaviour
     private int currentLine = 0;
     private DialogueData currentDialogue;
     private bool isAnimatingText = false;
-    private bool isDialogueActive = false;
+    public bool isDialogueActive = false;
 
     [SerializeField] private AudioSource audioSource;
-
-    NPCInteraction npcSide;
-
 
     private void Start()
     {

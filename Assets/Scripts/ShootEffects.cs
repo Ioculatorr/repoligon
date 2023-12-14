@@ -25,7 +25,7 @@ public class ShootEffects : MonoBehaviour
 
     public void ShootShake()
     {
-        shootShake.transform.DOShakeRotation(1, 3, 10, 15f, true)
+        shootShake.transform.DOShakeRotation(1, 3f, 10, 15f, true)
         .OnComplete(() =>
         {
             transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
@@ -34,10 +34,10 @@ public class ShootEffects : MonoBehaviour
 
     public void ShootShakeGun()
     {
-        gun.gameObject.transform.DOShakeRotation(1, 3, 10, 15f, true)
+        gun.gameObject.transform.DOShakeRotation(1f, new Vector3(3f, 0f, 0f), 10, 15f, true)
         .OnComplete(() =>
         {
-            transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
+            gun.gameObject.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
         });
     }
     public void ShootParticle()

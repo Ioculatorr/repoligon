@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyHitDetector : MonoBehaviour
+public class PlayerHitDetector : MonoBehaviour
 {
 
     [SerializeField] private UnityEvent myDeathTrigger;
@@ -13,11 +13,11 @@ public class EnemyHitDetector : MonoBehaviour
         if(other.gameObject.layer == 8)
         {
             myDeathTrigger.Invoke();
-            Death();
+            playerDeath();
         }
     }
 
-    void Death()
+    void playerDeath()
     {
         Time.timeScale = 0.2f;
     }

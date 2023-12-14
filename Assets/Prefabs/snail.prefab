@@ -5173,6 +5173,7 @@ MonoBehaviour:
   bulletSpeed: 30
   fireRate: 1
   sightRange: 20
+  enemyDeathSound: {fileID: 8300000, guid: ecd2427f9edd57d4a84bd2454e30d151, type: 3}
 --- !u!195 &2591764532943876044
 NavMeshAgent:
   m_ObjectHideFlags: 0

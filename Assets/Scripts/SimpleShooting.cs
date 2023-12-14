@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,9 @@ public class SimpleShooting : MonoBehaviour
 
     private float nextFireTime = 0f;
 
-    [SerializeField] private UnityEvent myShootTrigger;
+    [SerializeField] private UnityEvent onShoot;
+
+    public static Action OnHitEnemy;
 
     void Update()
     {
@@ -77,19 +80,18 @@ public class SimpleShooting : MonoBehaviour
             // Spawn a particle effect at the hit point
             SpawnHitParticle(hitPoint);
 
-            // Access the hit object
             GameObject hitObject = hit.collider.gameObject;
 
-            // Check if the hit object has the EnemyDetection script
+            // Check if the hit object has the EnemyAIWithShooting script
             EnemyAIWithShooting enemyDetection = hitObject.GetComponent<EnemyAIWithShooting>();
             if (enemyDetection != null)
             {
                 // Call the OnRaycastHit method on the enemy
                 enemyDetection.OnRaycastHit();
+                //OnHitEnemy?.Invoke();
             }
 
-            // Invoke the shoot trigger event
-            myShootTrigger.Invoke();
+            onShoot.Invoke();
         }
         else
         {
@@ -97,7 +99,7 @@ public class SimpleShooting : MonoBehaviour
             Debug.Log("Hit: Nothing!");
 
             // Invoke the shoot trigger event
-            myShootTrigger.Invoke();
+            onShoot.Invoke();
         }
 
         // Visualize the ray in the Scene view (for debugging purposes)

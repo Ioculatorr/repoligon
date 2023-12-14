@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
+  m_Name: snailChange
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - "g\xF3wno g\xF3wno"
+  - "nic nie zrobi\u0142em"
+  font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
+  fontSize: 36
+  fontAnimSpeed: 0.05
+  fontShakePower: 3
+  fontShake: 1
+  typingTalk: 1
+  typingSound: {fileID: 8300000, guid: 0690643fef1dd85439faecf1509539ad, type: 3}
+  typingPitch: 1
+  characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}

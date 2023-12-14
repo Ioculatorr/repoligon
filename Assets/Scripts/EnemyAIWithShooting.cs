@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyAIWithShooting : MonoBehaviour
 {
@@ -13,8 +15,12 @@ public class EnemyAIWithShooting : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float sightRange = 10f;
 
+    [SerializeField] private AudioClip enemyDeathSound;
+
     void Start()
     {
+        //SimpleShooting.OnHitEnemy += Die;
+
         agent = gameObject.GetComponent<NavMeshAgent>();
         StartCoroutine(ShootAtPlayer());
     }
@@ -75,6 +81,33 @@ public class EnemyAIWithShooting : MonoBehaviour
         return distanceToPlayer < sightRange;
     }
 
+    public void OnRaycastHit()
+    {
+        Die();
+    }
+
+    void Die()
+    {
+        // Play death sound from enemy's position
+        AudioSource.PlayClipAtPoint(enemyDeathSound, transform.position);
+
+        // Instantiate a temporary object to handle the sound
+        GameObject tempObject = new GameObject("TempObject");
+        tempObject.transform.position = transform.position;
+
+        // Play sound on the temporary object
+        AudioSource tempAudio = tempObject.AddComponent<AudioSource>();
+        tempAudio.clip = enemyDeathSound;
+        tempAudio.Play();
+
+
+        // Destroy the temporary object after the sound duration
+        Destroy(tempObject, enemyDeathSound.length);
+
+        // Destroy the enemy
+        Destroy(gameObject);
+    }
+
     //private void OnTriggerEnter(Collider other)
     //{
     //    if(other.gameObject.layer == 9)
@@ -83,9 +116,4 @@ public class EnemyAIWithShooting : MonoBehaviour
     //        //Destroy(gameObject);
     //    }
     //}
-
-    public void OnRaycastHit()
-    {
-        this.gameObject.GetComponent<AudioSource>().Play();
-    }
 }
