@@ -21,7 +21,7 @@ public class RandomUpAndDownMovement : MonoBehaviour
         float randomY = Random.Range(minYPosition, maxYPosition);
 
         // Move up to the random position
-        transform.DOMoveY(randomY, moveDuration)
+        transform.DOLocalMoveY(randomY, moveDuration)
             .SetEase(Ease.OutQuad)
             .OnComplete(() => FallDown(randomY));
     }
@@ -29,7 +29,7 @@ public class RandomUpAndDownMovement : MonoBehaviour
     void FallDown(float previousY)
     {
         // Fall down slowly to the previous position
-        transform.DOMoveY(previousY, fallDuration)
+        transform.DOLocalMoveY(previousY, fallDuration)
             .SetEase(Ease.InQuad)
             .OnComplete(MoveUp);
     }
