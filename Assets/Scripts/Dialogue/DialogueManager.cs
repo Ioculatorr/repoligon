@@ -7,12 +7,14 @@ using System.Collections;
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI CharacterName;
     public Image dialogueImage;
     public CanvasGroup dialogueGroup;
     //public float textAnimationSpeed = 0.05f;
 
     private int currentLine = 0;
     private DialogueData currentDialogue;
+    //private DialogueContainer dialogueContainer;
     private bool isAnimatingText = false;
     public bool isDialogueActive = false;
 
@@ -22,6 +24,12 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueText.text = "";
         dialogueGroup.alpha = 0f;
+
+        //foreach (var item in dialogueContainer.dialogues)
+        //{
+            
+        //}
+
     }
 
     private void Update()
@@ -52,6 +60,10 @@ public class DialogueManager : MonoBehaviour
         dialogueText.fontSize = currentDialogue.fontSize;
         dialogueImage.sprite = currentDialogue.characterSprite;
 
+        CharacterName.text = currentDialogue.characterName;
+        CharacterName.fontSize = currentDialogue.fontNameSize;
+        CharacterName.font = currentDialogue.fontName;
+
         audioSource.pitch = currentDialogue.typingPitch;
 
         dialogueGroup.DOFade(1f, 1f);
@@ -70,9 +82,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (!isAnimatingText && currentLine < currentDialogue.dialogueLines.Length)
         {
-            //currentLine++; wariant dobry pocz¹tek error poza list¹ koniec
             StartCoroutine(AnimateText());
-            //currentLine++; wariant dwa razy pierwsza wiadomoœæ dobry koniec
         }
         else if (!isAnimatingText && currentLine == currentDialogue.dialogueLines.Length)
         {

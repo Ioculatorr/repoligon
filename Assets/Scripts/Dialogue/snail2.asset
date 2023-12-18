@@ -15,6 +15,10 @@ MonoBehaviour:
   dialogueLines:
   - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
   - Smells like shit, tastes even better!
+  characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}
+  characterName: unknown man
+  fontName: {fileID: 11400000, guid: 63fb149830e1eb34da2b420529c18d19, type: 2}
+  fontNameSize: 60
   font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
   fontSize: 36
   fontAnimSpeed: 0.05
@@ -23,4 +27,3 @@ MonoBehaviour:
   typingTalk: 1
   typingSound: {fileID: 8300000, guid: 0690643fef1dd85439faecf1509539ad, type: 3}
   typingPitch: 1
-  characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}

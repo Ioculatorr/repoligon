@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
     bool isGrounded;
+    [SerializeField] private Headbobbing headbobbing;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         Jump();
+
+        // Call the headbobbing method with the information about movement
+        headbobbing.SetIsMoving(move.magnitude > 0.1f);
     }
 
     void Jump()

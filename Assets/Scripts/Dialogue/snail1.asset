@@ -15,11 +15,15 @@ MonoBehaviour:
   dialogueLines:
   - I'mma snail. I'mma snail.I'mma snail. I'mma snail.
   - OMOMOMOMOMOMOMOMOMOMO
+  characterSprite: {fileID: 21300000, guid: bab7d34adfaff324c8ad61de081b1f66, type: 3}
+  characterName: Snail1
+  fontName: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
+  fontNameSize: 60
   font: {fileID: 11400000, guid: bf9b91807e579f945af735c73c76c552, type: 2}
   fontSize: 36
   fontAnimSpeed: 0.05
   fontShakePower: 3
   fontShake: 0
+  typingTalk: 1
   typingSound: {fileID: 8300000, guid: c67d3e7c9fcb6694c8cf0ca5fba78fcc, type: 3}
   typingPitch: 1
-  characterSprite: {fileID: 21300000, guid: bab7d34adfaff324c8ad61de081b1f66, type: 3}

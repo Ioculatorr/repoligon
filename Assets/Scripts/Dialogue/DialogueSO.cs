@@ -2,12 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue System/Dialogue")]
 public class DialogueData : ScriptableObject
 {
     [TextArea(3, 10)]
     public string[] dialogueLines;
+
+    [Header("Character")]
+
+    public Sprite characterSprite;
+    public string characterName;
+    public TMP_FontAsset fontName;
+    public float fontNameSize = 60f;
 
     [Header("Font")]
 
@@ -24,6 +32,5 @@ public class DialogueData : ScriptableObject
     public bool typingTalk = true;
     public AudioClip typingSound; // Reference to the typing sound
     [Range(0.5f, 1.5f), Tooltip("Typing pitch with 2 decimal places")] public float typingPitch = 1f;
-    public Sprite characterSprite;
 
 }
