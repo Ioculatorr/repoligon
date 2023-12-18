@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class SimpleShooting : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab;
+    //[SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform shootingPointRaycast;
     //[SerializeField] private float bulletSpeed = 100f;
