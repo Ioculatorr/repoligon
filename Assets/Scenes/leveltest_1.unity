@@ -17751,6 +17751,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 169966459360371704, guid: 1c50bd2b70f83734f9c4f554c2d9551b,
         type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 169966459360371704, guid: 1c50bd2b70f83734f9c4f554c2d9551b,
+        type: 3}
       propertyPath: InitialModule.startSizeZ.scalar
       value: 5
       objectReference: {fileID: 0}

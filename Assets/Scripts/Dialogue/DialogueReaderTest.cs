@@ -12,9 +12,9 @@ public class DialogueReaderTest : MonoBehaviour
         {
             foreach (var item in dialogueContainer.dialogues)
             {
-                Debug.Log(item.fontSize);
-                Debug.Log(item.fontAnimSpeed);
-                Debug.Log(item.fontShake);
+                //Debug.Log(item.fontSize);
+                //Debug.Log(item.fontAnimSpeed);
+                //Debug.Log(item.fontShake);
             }
         }
         else
