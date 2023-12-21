@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: snail2
   m_EditorClassIdentifier: 
   dialogueLines:
-  - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-  - Smells like shit, tastes even better!
-  characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}
-  characterName: unknown man
-  fontName: {fileID: 11400000, guid: 63fb149830e1eb34da2b420529c18d19, type: 2}
+  - ratunkuuuu
+  - AAAAAA
+  characterSprite: {fileID: 0}
+  characterName: 
+  fontName: {fileID: 0}
   fontNameSize: 60
-  font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
+  font: {fileID: 11400000, guid: bf9b91807e579f945af735c73c76c552, type: 2}
   fontSize: 36
-  fontAnimSpeed: 0.05
+  fontAnimSpeed: 0
   fontShakePower: 3
-  fontShake: 1
+  fontShake: 0
   typingTalk: 1
-  typingSound: {fileID: 8300000, guid: 0690643fef1dd85439faecf1509539ad, type: 3}
+  typingSound: {fileID: 0}
   typingPitch: 1

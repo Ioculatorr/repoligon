@@ -12,26 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
   m_Name: snail1
   m_EditorClassIdentifier: 
-  sentences:
-  - dialogueLine: "Nowy \u015Bwiat czeka"
-    characterSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    characterName: {fileID: 0}
-    font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
-    fontSize: 32
-    fontAnimSpeed: 0.05
-    fontShakePower: 3
-    fontShake: 1
-    typingTalk: 1
-    typingSound: {fileID: 8300000, guid: 0690643fef1dd85439faecf1509539ad, type: 3}
-    typingPitch: 1
-  - dialogueLine: fdstsdadsadsa
-    characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}
-    characterName: {fileID: 0}
-    font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
-    fontSize: 65
-    fontAnimSpeed: 0.1
-    fontShakePower: 9
-    fontShake: 1
-    typingTalk: 1
-    typingSound: {fileID: 8300000, guid: c67d3e7c9fcb6694c8cf0ca5fba78fcc, type: 3}
-    typingPitch: 1
+  dialogueLines:
+  - kurde
+  - "SO, Struck, jak to zrobi\u0107"
+  characterSprite: {fileID: 0}
+  characterName: 
+  fontName: {fileID: 0}
+  fontNameSize: 60
+  font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
+  fontSize: 36
+  fontAnimSpeed: 0.05
+  fontShake: 0
+  fontShakePower: 3
+  typingTalk: 1
+  typingSound: {fileID: 8300000, guid: c67d3e7c9fcb6694c8cf0ca5fba78fcc, type: 3}
+  typingPitch: 1

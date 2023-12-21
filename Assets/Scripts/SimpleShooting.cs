@@ -78,6 +78,7 @@ public class SimpleShooting : MonoBehaviour
             Vector3 hitPoint = hit.point;
 
             // Spawn a particle effect at the hit point
+            //SpawnHitParticle(hitPoint);
 
             GameObject hitObject = hit.collider.gameObject;
 
