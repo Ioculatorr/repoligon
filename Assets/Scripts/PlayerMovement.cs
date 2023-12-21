@@ -9,6 +9,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed = 12f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float jumpHeight = 5f;
+    [SerializeField] private float jumpCooldown = 1.0f;
+
+    private float lastJumpTime;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -44,7 +47,11 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        Jump();
+        // Check if enough time has passed since the last jump
+        if (Time.time - lastJumpTime >= jumpCooldown)
+        {
+            Jump();
+        }
 
         // Call the headbobbing method with the information about movement
         headbobbing.SetIsMoving(move.magnitude > 0.1f);
@@ -52,10 +59,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButton("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             this.GetComponent<AudioSource>().Play();
+
+            // Update the last jump time
+            lastJumpTime = Time.time;
         }
     }
 }

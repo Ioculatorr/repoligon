@@ -78,7 +78,6 @@ public class SimpleShooting : MonoBehaviour
             Vector3 hitPoint = hit.point;
 
             // Spawn a particle effect at the hit point
-            SpawnHitParticle(hitPoint);
 
             GameObject hitObject = hit.collider.gameObject;
 
@@ -88,6 +87,8 @@ public class SimpleShooting : MonoBehaviour
             {
                 // Call the OnRaycastHit method on the enemy
                 enemyDetection.OnRaycastHit();
+                SpawnHitParticle(hitPoint);
+                Debug.Log("Hit: Enemy");
                 //OnHitEnemy?.Invoke();
             }
 

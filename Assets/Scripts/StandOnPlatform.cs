@@ -3,27 +3,26 @@ using UnityEngine;
 
 public class StandOnPlatform : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-
-    private void OnTriggerEnter(Collider player)
+    private void OnTriggerEnter(Collider other)
     {
-        if (player.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            // Set the player as a child of the platform
-            player.transform.parent = transform;
-            player.AddComponent<Rigidbody>();
-            player.GetComponent<Rigidbody>().freezeRotation = true;
+            // Set the other as a child of the platform
+            other.transform.parent = transform;
+            other.AddComponent<Rigidbody>();
+            other.GetComponent<Rigidbody>().freezeRotation = true;
+            other.GetComponent<Rigidbody>().isKinematic = true;
             Debug.Log("I am in");
         }
     }
 
-    private void OnTriggerExit(Collider player)
+    private void OnTriggerExit(Collider other)
     {
-        if (player.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            // Remove the player as a child of the platform
-            player.transform.parent = null;
-            Destroy(player.GetComponent<Rigidbody>());
+            // Remove the other as a child of the platform
+            other.transform.parent = null;
+            Destroy(other.GetComponent<Rigidbody>());
 
             Debug.Log("I am out");
         }
