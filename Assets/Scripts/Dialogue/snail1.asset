@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: snail1
   m_EditorClassIdentifier: 
   dialogueLines:
-  - kurde
+  - kurdekurdekurdekurdekurdekurdekurdekurdekurdekurde
   - "SO, Struck, jak to zrobi\u0107"
   characterSprite: {fileID: 0}
   characterName: 

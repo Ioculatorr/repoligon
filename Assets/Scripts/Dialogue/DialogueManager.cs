@@ -29,7 +29,6 @@ public class DialogueManager : MonoBehaviour
         //{
 
         //}
-
     }
 
     private void Update()

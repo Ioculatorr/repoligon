@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class LoopShakeDOTween : MonoBehaviour
 {
-    [SerializeField] private float shakeDur = 0.1f;
-    [SerializeField] private float shakeStr = 0.1f;
+    [SerializeField] private float shakeDur = 1f;
+    [SerializeField] private float shakeStr = 3f;
+    [SerializeField] private int shakeVib = 10;
     void Start()
     {
-        this.gameObject.transform.DOShakeRotation(shakeDur, shakeStr, 10, 90f, false)
+        this.gameObject.transform.DOShakeRotation(shakeDur, shakeStr, shakeVib, 90f, false)
             .SetLoops(-1, LoopType.Restart);
     }
 }

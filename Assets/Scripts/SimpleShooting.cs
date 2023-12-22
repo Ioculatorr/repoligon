@@ -12,6 +12,7 @@ public class SimpleShooting : MonoBehaviour
     //[SerializeField] private float bulletSpeed = 100f;
     [SerializeField] private float fireRate = 10f; // bullets per second
     [SerializeField] private ParticleSystem hitParticlePrefab;
+    [SerializeField] private ParticleSystem hitParticleEnemyPrefab;
 
     private float nextFireTime = 0f;
 
@@ -69,16 +70,13 @@ public class SimpleShooting : MonoBehaviour
         Ray ray = new Ray(shootingPointRaycast.position, shootingPointRaycast.forward);
 
         // Use a large distance for the raycast (adjust as needed)
-        float maxRaycastDistance = 1000f;
+        float maxRaycastDistance = 100f;
 
         // Check if the ray hits something
         if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance))
         {
             // Access the hit point
             Vector3 hitPoint = hit.point;
-
-            // Spawn a particle effect at the hit point
-            //SpawnHitParticle(hitPoint);
 
             GameObject hitObject = hit.collider.gameObject;
 
@@ -88,9 +86,15 @@ public class SimpleShooting : MonoBehaviour
             {
                 // Call the OnRaycastHit method on the enemy
                 enemyDetection.OnRaycastHit();
-                SpawnHitParticle(hitPoint);
+                SpawnHitParticleEnemy(hitPoint);
                 Debug.Log("Hit: Enemy");
                 //OnHitEnemy?.Invoke();
+            }
+            else
+            {
+                // Spawn a regular particle effect at the hit point
+                SpawnHitParticle(hitPoint);
+                Debug.Log("Hit: Non-Enemy");
             }
 
             onShoot.Invoke();
@@ -118,5 +122,17 @@ public class SimpleShooting : MonoBehaviour
 
         // Destroy the particle effect after its duration (adjust as needed)
         Destroy(hitParticle.gameObject, hitParticle.main.duration);
+    }
+
+    void SpawnHitParticleEnemy(Vector3 position)
+    {
+        // Instantiate the particle effect prefab at the hit position
+        ParticleSystem hitParticleEnemy = Instantiate(hitParticleEnemyPrefab, position, Quaternion.identity);
+
+        // Play the particle effect
+        hitParticleEnemy.Emit(1);
+
+        // Destroy the particle effect after its duration (adjust as needed)
+        Destroy(hitParticleEnemy.gameObject, hitParticleEnemy.main.duration);
     }
 }

@@ -7,8 +7,8 @@ public class ShootEffects : MonoBehaviour
 {
     private AudioSource shootSounds;
     private Transform shootShake;
-    private ParticleSystem shootParticle;
     private Light shootLight;
+    private ParticleSystem shootParticle;
 
     [SerializeField] private GameObject gun;
     [SerializeField] private ParticleSystem shootParticleBullet;
@@ -18,7 +18,6 @@ public class ShootEffects : MonoBehaviour
         shootSounds = GetComponent<AudioSource>();
         shootShake = GetComponent<Transform>();
         shootLight = GetComponentInChildren<Light>();
-        shootParticle = GetComponentInChildren<ParticleSystem>();
     }
 
     public void ShootAudio()
