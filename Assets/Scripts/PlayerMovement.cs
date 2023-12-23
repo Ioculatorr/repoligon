@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
+    [SerializeField] private CharacterController characterController;
 
     [SerializeField] private float speed = 12f;
     [SerializeField] private float gravity = -9.81f;
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     bool isGrounded;
     [SerializeField] private Headbobbing headbobbing;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,11 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        characterController.Move(move * speed * Time.deltaTime);
 
         velocity.y += gravity * Time.deltaTime;
 
-        controller.Move(velocity * Time.deltaTime);
+        characterController.Move(velocity * Time.deltaTime);
 
         // Check if enough time has passed since the last jump
         if (Time.time - lastJumpTime >= jumpCooldown)

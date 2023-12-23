@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeathEffects : MonoBehaviour
 {
     private AudioSource deathSounds;
+    [SerializeField] private CanvasGroup deathCanvas;
 
     private void Start()
     {
@@ -14,5 +15,10 @@ public class DeathEffects : MonoBehaviour
     public void deathSound()
     {
         deathSounds.Play();
+    }
+
+    public void deathScreen()
+    {
+        deathCanvas.alpha = 1.0f;
     }
 }

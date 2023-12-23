@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerHitDetector : MonoBehaviour
 {
-
-    [SerializeField] private UnityEvent myDeathTrigger;
+    [SerializeField] private UnityEvent playerDeath;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private float fallDeathSpeed = 50f;
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 8)
         {
-            myDeathTrigger.Invoke();
-            playerDeath();
+            playerDeath.Invoke();
         }
     }
-
-    void playerDeath()
+    private void OnCollisionEnter(Collision other)
     {
-        Time.timeScale = 0.2f;
+        if (characterController.velocity.magnitude > fallDeathSpeed)
+        {
+            playerDeath.Invoke();
+        }
     }
 }
