@@ -7,8 +7,8 @@ using UnityEngine.Rendering.Universal;
 
 public class FallEffects : MonoBehaviour
 {
-    public CharacterController characterController;
-    public Volume postProcessVolume;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Volume postProcessVolume;
 
     [SerializeField] private float minFallingSpeed = 20f;
     [SerializeField] private float maxFallingSpeed = 200f;
@@ -38,9 +38,15 @@ public class FallEffects : MonoBehaviour
             float normalizedSpeed = Mathf.InverseLerp(-minFallingSpeed, -maxFallingSpeed, characterController.velocity.y);
             intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
 
-            UpdateVignette();
         }
+        else
+        {
+            // Player is not falling, set intensity to zero
+            intensity = 0f;
+        }
+            UpdateVignette();
     }
+
     private void UpdateVignette()
     {
         vignette.intensity.value = intensity;
@@ -49,11 +55,14 @@ public class FallEffects : MonoBehaviour
 
     IEnumerator CameraFallShake()
     {
-                fallCamera.transform.DOShakeRotation(1f, intensity * 10f, 10, 15f, false)
-        .SetLoops(-1, LoopType.Incremental)
-        .SetEase(Ease.Linear);
+        while(true)
+        {
+                fallCamera.transform.DOShakeRotation(1f, intensity * 100f, 10, 15f, false)
+                                                    .SetLoops(-1, LoopType.Incremental)
+                                                    .SetEase(Ease.Linear);
 
-        Debug.Log("I am shaken");
-        yield return new WaitForSeconds(0.1f);
+                Debug.Log("I am shaken");
+                yield return new WaitForSeconds(0.1f);
+        }
     }
 }

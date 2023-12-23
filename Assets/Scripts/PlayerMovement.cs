@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,8 +19,16 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     Vector3 velocity;
-    bool isGrounded;
+    public bool isGrounded;
     [SerializeField] private Headbobbing headbobbing;
+    [SerializeField] private UnityEvent movementEvent;
+
+
+    [SerializeField] private float minFallDamageVelocity = 9f;
+    private float fallStartY;
+
+    bool canDie = true;
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +65,30 @@ public class PlayerMovement : MonoBehaviour
 
         // Call the headbobbing method with the information about movement
         headbobbing.SetIsMoving(move.magnitude > 0.1f);
+
+
+
+
+
+
+
+        // If the player starts falling, record the starting Y position
+        if (!isGrounded && Mathf.Approximately(fallStartY, 0f))
+        {
+            fallStartY = transform.position.y;
+        }
+
+        // If the player has landed, calculate fall damage
+        if (isGrounded && !Mathf.Approximately(fallStartY, 0f))
+        {
+            float fallDistance = fallStartY - transform.position.y;
+
+            if (fallDistance > 0 && fallDistance >= minFallDamageVelocity && canDie == true)
+            {
+                movementEvent.Invoke();
+                canDie = false;
+            }
+        }
     }
 
     void Jump()

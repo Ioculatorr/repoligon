@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public class PlayerHitDetector : MonoBehaviour
 {
     [SerializeField] private UnityEvent playerDeath;
-    [SerializeField] private Rigidbody playerRB;
-    [SerializeField] private float fallDeathSpeed = 50f;
+    //[SerializeField] private Rigidbody playerRB;
+    //[SerializeField] private float fallDeathSpeed = 50f;
 
     private bool canDie;
 
@@ -19,12 +19,15 @@ public class PlayerHitDetector : MonoBehaviour
             playerDeath.Invoke();
         }
     }
-    private void OnCollisionEnter(Collision other)
-    {
-        if (playerRB.velocity.magnitude > fallDeathSpeed && canDie == true)
-        {
-            playerDeath.Invoke();
-            canDie = false;
-        }
-    }
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if (playerRB.velocity.magnitude > fallDeathSpeed && canDie == true)
+    //    {
+    //        playerDeath.Invoke();
+    //        canDie = false;
+    //    }
+    //}
+
+
+
 }
