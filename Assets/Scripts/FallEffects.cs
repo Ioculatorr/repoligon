@@ -19,8 +19,11 @@ public class FallEffects : MonoBehaviour
     [SerializeField] private AudioSource fallAudio;
     [SerializeField] private GameObject fallCamera;
 
+    private float intensity;
+
     private void Start()
     {
+        StartCoroutine(CameraFallShake());
         if (postProcessVolume.profile.TryGet(out vignette))
         {
             // You can access other post-processing effects in a similar way
@@ -30,26 +33,27 @@ public class FallEffects : MonoBehaviour
 
     private void Update()
     {
-        if (characterController.isGrounded)
-        {
-            // Reset the vignette when the character is grounded
-            UpdateVignette(0f);
-        }
-        else if (characterController.velocity.y < -minFallingSpeed)
+        if (characterController.velocity.y < -minFallingSpeed)
         {
             float normalizedSpeed = Mathf.InverseLerp(-minFallingSpeed, -maxFallingSpeed, characterController.velocity.y);
-            float vignetteIntensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
+            intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
 
-            UpdateVignette(vignetteIntensity);
+            UpdateVignette();
         }
     }
-    private void UpdateVignette(float intensity)
+    private void UpdateVignette()
     {
         vignette.intensity.value = intensity;
         fallAudio.volume = intensity * 2;
+    }
 
-            fallCamera.transform.DOShakeRotation(1f, intensity*100, 10, 15f, false)
+    IEnumerator CameraFallShake()
+    {
+                fallCamera.transform.DOShakeRotation(1f, intensity * 10f, 10, 15f, false)
         .SetLoops(-1, LoopType.Incremental)
         .SetEase(Ease.Linear);
+
+        Debug.Log("I am shaken");
+        yield return new WaitForSeconds(0.1f);
     }
 }

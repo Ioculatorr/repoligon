@@ -7,8 +7,10 @@ using UnityEngine.Events;
 public class PlayerHitDetector : MonoBehaviour
 {
     [SerializeField] private UnityEvent playerDeath;
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Rigidbody playerRB;
     [SerializeField] private float fallDeathSpeed = 50f;
+
+    private bool canDie;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,9 +21,10 @@ public class PlayerHitDetector : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (characterController.velocity.magnitude > fallDeathSpeed)
+        if (playerRB.velocity.magnitude > fallDeathSpeed && canDie == true)
         {
             playerDeath.Invoke();
+            canDie = false;
         }
     }
 }
