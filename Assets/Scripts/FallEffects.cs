@@ -20,6 +20,8 @@ public class FallEffects : MonoBehaviour
     [SerializeField] private GameObject fallCamera;
 
     private float intensity;
+    //private PlayerMovement boolGrounded;
+    //private bool canStartCoroutine = true;
 
     private void Start()
     {
@@ -33,6 +35,21 @@ public class FallEffects : MonoBehaviour
 
     private void Update()
     {
+
+
+        //if (boolGrounded.isGrounded == false && canStartCoroutine == true)
+        //{
+        //    StartCoroutine(CameraFallShake());
+        //    canStartCoroutine = false;
+        //}
+        //else if(boolGrounded.isGrounded == true)
+        //{
+        //    StopCoroutine(CameraFallShake());
+        //    canStartCoroutine = true;
+        //}
+
+
+
         if (characterController.velocity.y < -minFallingSpeed)
         {
             float normalizedSpeed = Mathf.InverseLerp(-minFallingSpeed, -maxFallingSpeed, characterController.velocity.y);
@@ -57,12 +74,11 @@ public class FallEffects : MonoBehaviour
     {
         while(true)
         {
-                fallCamera.transform.DOShakeRotation(1f, intensity * 100f, 10, 15f, false)
+                fallCamera.transform.DOShakeRotation(1f, intensity * 50f, 10, 15f, false)
                                                     .SetLoops(-1, LoopType.Incremental)
                                                     .SetEase(Ease.Linear);
 
-                Debug.Log("I am shaken");
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.25f);
         }
     }
 }

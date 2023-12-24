@@ -21,11 +21,11 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     public bool isGrounded;
     [SerializeField] private Headbobbing headbobbing;
-    [SerializeField] private UnityEvent movementEvent;
+    [SerializeField] private UnityEvent fallDeathEvent;
 
 
-    [SerializeField] private float minFallDamageVelocity = 9f;
-    private float fallStartY;
+    [SerializeField] private float minFallDistance = 9f;
+    private float fallStartY = 0f;
 
     bool canDie = true;
 
@@ -83,11 +83,16 @@ public class PlayerMovement : MonoBehaviour
         {
             float fallDistance = fallStartY - transform.position.y;
 
-            if (fallDistance > 0 && fallDistance >= minFallDamageVelocity && canDie == true)
+            Debug.Log(fallDistance.ToString());
+
+            if (fallDistance > 0 && fallDistance >= minFallDistance && canDie == true)
             {
-                movementEvent.Invoke();
+                fallDeathEvent.Invoke();
+                this.enabled = false;
                 canDie = false;
             }
+
+            fallStartY = 0f;
         }
     }
 

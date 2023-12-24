@@ -7,11 +7,12 @@ public class StandOnPlatform : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Set the other as a child of the platform
-            other.transform.parent = transform;
             other.AddComponent<Rigidbody>();
             other.GetComponent<Rigidbody>().freezeRotation = true;
-            other.GetComponent<Rigidbody>().isKinematic = true;
+            //other.GetComponent<Rigidbody>().isKinematic = true;
+
+            // Set the other as a child of the platform
+            other.transform.parent = transform;
             Debug.Log("I am in");
         }
     }
@@ -20,9 +21,10 @@ public class StandOnPlatform : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Destroy(other.GetComponent<Rigidbody>());
+
             // Remove the other as a child of the platform
             other.transform.parent = null;
-            Destroy(other.GetComponent<Rigidbody>());
 
             Debug.Log("I am out");
         }
