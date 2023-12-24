@@ -10,7 +10,7 @@ public class DialogueReaderTest : MonoBehaviour
     {
         if(dialogueContainer != null)
         {
-            foreach (var item in dialogueContainer.dialogues)
+            foreach (var item in dialogueContainer.sentences)
             {
                 //Debug.Log(item.fontSize);
                 //Debug.Log(item.fontAnimSpeed);

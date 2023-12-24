@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class DialogueData : ScriptableObject
 {
     [TextArea(3, 10)]
-    public string[] dialogueLines;
+    public string dialogueLine;
 
     [Header("Character")]
 

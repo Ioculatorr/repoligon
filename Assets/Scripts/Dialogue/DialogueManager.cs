@@ -13,7 +13,7 @@ public class DialogueManager : MonoBehaviour
     //public float textAnimationSpeed = 0.05f;
 
     private int currentLine = 0;
-    private DialogueData currentDialogue;
+    private DialogueData currentSentence;
     //private DialogueContainer dialogueContainer;
     private bool isAnimatingText = false;
     public bool isDialogueActive = false;
@@ -39,7 +39,7 @@ public class DialogueManager : MonoBehaviour
             {
                 ShowNextLine();
             }
-            else if (currentLine >= currentDialogue.dialogueLines.Length)
+            else if (currentLine >= currentSentence.dialogueLine.Length)
             {
                 // If the text animation is in progress and all lines are shown, end the dialogue
                 EndDialogue();
@@ -51,19 +51,19 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueText.text = ""; // Clear the text before starting a new dialogue
 
-        currentDialogue = dialogue;
+        currentSentence = dialogue;
         currentLine = 0;
 
         // Set the font of dialogueText using the font from the DialogueData
-        dialogueText.font = currentDialogue.font;
-        dialogueText.fontSize = currentDialogue.fontSize;
-        dialogueImage.sprite = currentDialogue.characterSprite;
+        dialogueText.font = currentSentence.font;
+        dialogueText.fontSize = currentSentence.fontSize;
+        dialogueImage.sprite = currentSentence.characterSprite;
 
-        CharacterName.text = currentDialogue.characterName;
-        CharacterName.fontSize = currentDialogue.fontNameSize;
-        CharacterName.font = currentDialogue.fontName;
+        CharacterName.text = currentSentence.characterName;
+        CharacterName.fontSize = currentSentence.fontNameSize;
+        CharacterName.font = currentSentence.fontName;
 
-        audioSource.pitch = currentDialogue.typingPitch;
+        audioSource.pitch = currentSentence.typingPitch;
 
         dialogueGroup.DOFade(1f, 1f);
 
@@ -79,11 +79,11 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowNextLine()
     {
-        if (!isAnimatingText && currentLine < currentDialogue.dialogueLines.Length)
+        if (!isAnimatingText && currentLine < currentSentence.dialogueLine.Length)
         {
             StartCoroutine(AnimateText());
         }
-        else if (!isAnimatingText && currentLine == currentDialogue.dialogueLines.Length)
+        else if (!isAnimatingText && currentLine == currentSentence.dialogueLine.Length)
         {
             EndDialogue();
         }
@@ -93,23 +93,23 @@ public class DialogueManager : MonoBehaviour
     {
         isAnimatingText = true;
         dialogueText.text = "";
-        string line = currentDialogue.dialogueLines[currentLine];
+        string line = currentSentence.dialogueLine[currentLine].ToString();
 
         for (int i = 0; i < line.Length; i++)
         {
             dialogueText.text += line[i];
-            if (currentDialogue.typingSound != null && currentDialogue.typingTalk == true)
+            if (currentSentence.typingSound != null && currentSentence.typingTalk == true)
             {
-                audioSource.PlayOneShot(currentDialogue.typingSound); // Play typing sound
-                //currentDialogue.typingPitch = Random.Range(0.7f, 1.5f);
+                audioSource.PlayOneShot(currentSentence.typingSound); // Play typing sound
+                //currentSentence.typingPitch = Random.Range(0.7f, 1.5f);
             }
 
-            if (currentDialogue.fontShake == true)
+            if (currentSentence.fontShake == true)
             {
-                dialogueText.transform.DOShakePosition(0.2f, currentDialogue.fontShakePower, 15, 10);
+                dialogueText.transform.DOShakePosition(0.2f, currentSentence.fontShakePower, 15, 10);
             }
 
-            yield return new WaitForSeconds(currentDialogue.fontAnimSpeed);
+            yield return new WaitForSeconds(currentSentence.fontAnimSpeed);
         }
 
         isAnimatingText = false;

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3096ce21a5ade943a66894268645494, type: 3}
+  m_Name: DialogueContainer2
+  m_EditorClassIdentifier: 
+  smallerObjects:
+  - {fileID: 11400000, guid: 47d301b25f606a24c9ad205bd1813740, type: 2}
+  - {fileID: 11400000, guid: 7cbe024b7fe63fb4d8c6e29996b0b1aa, type: 2}
