@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,16 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float speed = 12f;
     [SerializeField] private float gravity = -9.81f;
+
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float jumpCooldown = 1.0f;
 
+    [SerializeField] private float dashSpeed = 24f;
+    [SerializeField] private float dashTime = 0.5f; // Dash duration
+    [SerializeField] private float dashCooldown = 3.0f;  // Dash cooldown
+
     private float lastJumpTime;
+    private float lastDashTime;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -28,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     private float fallStartY = 0f;
 
     bool canDie = true;
+    //bool isDashing = false;
 
 
     // Start is called before the first frame update
@@ -61,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
         if (Time.time - lastJumpTime >= jumpCooldown)
         {
             Jump();
+        }
+
+        if (Time.time - lastDashTime >= dashCooldown)
+        {
+            Dash();
         }
 
         // Call the headbobbing method with the information about movement
@@ -106,5 +119,34 @@ public class PlayerMovement : MonoBehaviour
             // Update the last jump time
             lastJumpTime = Time.time;
         }
+    }
+
+    void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            StartCoroutine(PerformDash());
+
+            lastDashTime = Time.time;
+        }
+    }
+
+    IEnumerator PerformDash()
+    {
+        //isDashing = true;
+
+        float dashTimer = dashTime;
+        while (dashTimer > 0f)
+        {
+            // Move the player in the dash direction
+            characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+
+            // Update timer
+            dashTimer -= Time.deltaTime;
+
+            yield return null;
+        }
+
+        //isDashing = false;
     }
 }
