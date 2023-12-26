@@ -21,7 +21,7 @@ public class PlayerRigidbodyMovement : MonoBehaviour
         lastJumpTime = -jumpCooldown;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         HandleMovementInput();
         HandleMouseLook();
@@ -47,11 +47,11 @@ public class PlayerRigidbodyMovement : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y");
 
         // Rotate the player (body) around the Y-axis
-        transform.Rotate(Vector3.up * mouseX * rotationSpeed);
+        transform.Rotate(Vector3.up * mouseX * rotationSpeed * Time.deltaTime);
 
         // Rotate the camera (head) around the X-axis with clamping to prevent over-rotation
         float currentRotation = Camera.main.transform.eulerAngles.x;
-        float newRotation = Mathf.Clamp(currentRotation - mouseY * rotationSpeed, 0f, 90f);
+        float newRotation = Mathf.Clamp(currentRotation - mouseY * rotationSpeed * Time.deltaTime, 0f, 90f);
 
         Camera.main.transform.rotation = Quaternion.Euler(newRotation, transform.eulerAngles.y, 0f);
     }

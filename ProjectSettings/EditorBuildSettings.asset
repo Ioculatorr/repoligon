@@ -6,9 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/asyncloading.unity
-    guid: ce49aba0fd3075747990876f270e5998
-  - enabled: 1
-    path: Assets/Scenes/crafting.unity
-    guid: f6c556aec958ace4e9cf53d914dd099e
+    path: Assets/Scenes/leveltest_1.unity
+    guid: 6b622ffd268839a42a82242da882003f
   m_configObjects: {}
