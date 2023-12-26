@@ -97,8 +97,14 @@ public class DialogueManager : MonoBehaviour
 
         for (int i = 0; i < line.Length; i++)
         {
-            dialogueText.text += line[i];
-            if (currentDialogue.typingSound != null && currentDialogue.typingTalk == true)
+            //dialogueText.text += line[i];
+
+            char currentChar = line[i];
+
+            dialogueText.text += currentChar;
+
+
+            if (currentChar != ' ' && currentDialogue.typingSound != null && currentDialogue.typingTalk == true)
             {
                 audioSource.PlayOneShot(currentDialogue.typingSound); // Play typing sound
                 //currentDialogue.typingPitch = Random.Range(0.7f, 1.5f);

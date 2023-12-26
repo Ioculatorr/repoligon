@@ -15,6 +15,7 @@ MonoBehaviour:
   dialogueLines:
   - kurdekurdekurdekurdekurdekurdekurdekurdekurdekurde
   - "SO, Struck, jak to zrobi\u0107"
+  - "Cicha noc                           \u015Awi\u0119ta noc"
   characterSprite: {fileID: 0}
   characterName: 
   fontName: {fileID: 0}

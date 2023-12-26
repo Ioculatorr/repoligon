@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c817e7299088f2d4faab65a54d8ddafc, type: 3}
+  m_Name: ShotgunTest
+  m_EditorClassIdentifier: 
+  weaponPrefab: {fileID: 3236003531309368892, guid: 515f9b8906e630247a0f6de444d9eb7f,
+    type: 3}
+  damage: 0
+  fireRate: 0

@@ -13,6 +13,8 @@ public class ShootEffects : MonoBehaviour
     [SerializeField] private GameObject gun;
     [SerializeField] private ParticleSystem shootParticleBullet;
 
+    private Tween gunShakeTween;
+
     private void Start()
     {
         shootSounds = GetComponent<AudioSource>();
@@ -36,13 +38,29 @@ public class ShootEffects : MonoBehaviour
 
     public void ShootShakeGun()
     {
-        gun.gameObject.transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f);
-        gun.gameObject.transform.DOPunchPosition(new Vector3(0, 0, -0.1f), 0.5f, 10, 0f, false)
-        .OnComplete(() =>
+        // Ensure the previous tween is killed before starting a new one
+        if (gunShakeTween != null && gunShakeTween.IsActive())
         {
-            gun.gameObject.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.5f);
-            gun.gameObject.transform.DOLocalMove(new Vector3(0, 0, 0), 0.5f);
-        });
+            gunShakeTween.Kill();
+        }
+
+        // Create a new reusable tween instance
+        gunShakeTween = DOTween.Sequence()
+            .Append(gun.gameObject.transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f))
+            .Join(gun.gameObject.transform.DOPunchPosition(new Vector3(0, 0, -0.1f), 0.5f, 10, 0f, false))
+            .OnComplete(() =>
+            {
+                // Reset the gun position and rotation
+                gun.gameObject.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.5f);
+                gun.gameObject.transform.DOLocalMove(new Vector3(0, 0, 0), 0.5f);
+            });
+
+        // Set the reuse option for the tween
+        gunShakeTween.SetRecyclable(true);
+        gunShakeTween.SetAutoKill(false);
+
+        // Start the tween
+        gunShakeTween.Restart();
     }
     public void ShootParticle()
     {
