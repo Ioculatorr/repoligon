@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ChangeScriptableObject : MonoBehaviour
 {
-    public ShotgunSO scriptableObjectA;
-    public ShotgunSO scriptableObjectB;
+    public WeaponData scriptableObjectA;
+    public WeaponData scriptableObjectB;
 
-    private ShotgunSO currentScriptableObject;
+    private WeaponData currentScriptableObject;
     private GameObject spawnedPrefab;
 
     void Start()
@@ -40,7 +40,7 @@ public class ChangeScriptableObject : MonoBehaviour
         }
     }
 
-    void SetScriptableObject(ShotgunSO newScriptableObject)
+    void SetScriptableObject(WeaponData newScriptableObject)
     {
         // Set the current ScriptableObject and spawn its associated prefab
         currentScriptableObject = newScriptableObject;

@@ -7,10 +7,14 @@ using UnityEngine.Events;
 public class SimpleShooting : MonoBehaviour
 {
     //[SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform shootingPoint;
+
+    //[SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform shootingPointRaycast;
+
     //[SerializeField] private float bulletSpeed = 100f;
     [SerializeField] private float fireRate = 10f; // bullets per second
+
+
     [SerializeField] private ParticleSystem hitParticlePrefab;
     [SerializeField] private ParticleSystem hitParticleEnemyPrefab;
 
