@@ -68,7 +68,10 @@ public class DialogueManager : MonoBehaviour
         dialogueGroup.DOFade(1f, 1f);
 
         isDialogueActive = true;
-        StopAllCoroutines();
+
+        //StopAllCoroutines();
+
+        StopCoroutine(AnimateText());
 
         // Check if the coroutine is already running before starting a new one
         if (!isAnimatingText)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovementRigid : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class PlayerMovementRigid : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] float playerHeight;
     [SerializeField] LayerMask whatIsGround;
-    bool grounded;
+    public bool isGrounded;
 
     [Header("Slope Handling")]
     [SerializeField] float maxSlopeAngle;
@@ -56,6 +57,11 @@ public class PlayerMovementRigid : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+    bool canDie;
+    private float fallStartY = 0f;
+    private float minFallDistance = 20f;
+
+    [SerializeField] private Headbobbing headbobbing;
 
     public MovementState state;
     public enum MovementState
@@ -66,6 +72,7 @@ public class PlayerMovementRigid : MonoBehaviour
         air
     }
 
+    [SerializeField] private UnityEvent fallDamageEvent;
 
     private void Start()
     {
@@ -75,6 +82,8 @@ public class PlayerMovementRigid : MonoBehaviour
         readyToJump = true;
         readyToDash= true;
 
+        canDie = true;
+
         startYScale = transform.localScale.y;
     }
 
@@ -82,22 +91,31 @@ public class PlayerMovementRigid : MonoBehaviour
     {
 
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
+        MovePlayer();
         SpeedControl();
         StateHandler();
+        FallDamage();
 
-        if (grounded)
+
+        if (isGrounded)
+        {
             rb.drag = groundDrag;
+            // Call the headbobbing method with the information about movement
+            headbobbing.SetIsMoving(rb.velocity.magnitude > 0.1f);
+        }
         else
+        {
             rb.drag = 0;
+        }
     }
 
-    private void FixedUpdate()
-    {
-        MovePlayer();
-    }
+    //private void FixedUpdate()
+    //{
+    //    //MovePlayer();
+    //}
 
     private void MyInput()
     {
@@ -105,7 +123,7 @@ public class PlayerMovementRigid : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && readyToJump && isGrounded)
         {
             readyToJump = false;
 
@@ -149,14 +167,14 @@ public class PlayerMovementRigid : MonoBehaviour
         
         
         //// Mode - Sprint
-        //if(grounded && Input.GetKey(sprintKey))
+        //if(isGrounded && Input.GetKey(sprintKey))
         //{
         //    state = MovementState.sprinting;
         //    moveSpeed = sprintSpeed;
         //}
 
 
-        if (grounded)
+        if (isGrounded)
         {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
@@ -183,11 +201,11 @@ public class PlayerMovementRigid : MonoBehaviour
         }
 
         // on ground
-        if (grounded)
+        if (isGrounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
-        else if (!grounded)
+        else if (!isGrounded)
         {
             // Add damping force to slow down in the air
             rb.AddForce(-rb.velocity.normalized * airDampingForce, ForceMode.Acceleration);
@@ -251,6 +269,32 @@ public class PlayerMovementRigid : MonoBehaviour
         readyToDash = true;
 
         exitingSlope = false;
+    }
+
+    private void FallDamage()
+    {
+        // If the player starts falling, record the starting Y position
+        if (!isGrounded && Mathf.Approximately(fallStartY, 0f))
+        {
+            fallStartY = transform.position.y;
+        }
+
+        // If the player has landed, calculate fall damage
+        if (isGrounded && !Mathf.Approximately(fallStartY, 0f))
+        {
+            float fallDistance = fallStartY - transform.position.y;
+
+            Debug.Log(fallDistance.ToString());
+
+            if (fallDistance > 0 && fallDistance >= minFallDistance && canDie == true)
+            {
+                fallDamageEvent.Invoke();
+                this.enabled = false;
+                canDie = false;
+            }
+
+            fallStartY = 0f;
+        }
     }
 
 

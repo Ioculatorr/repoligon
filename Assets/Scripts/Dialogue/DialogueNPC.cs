@@ -29,10 +29,16 @@ public class DialogueNPC : MonoBehaviour
         {
             //npcClickTo.alpha = 1f;
             //npcClickTo.DOFade(1f, 1f);
+
             inTalkingRange = true;
+
+            Debug.Log("We talking");
 
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
             dialogueManager.StartDialogue(dialogue);
+
+
+
             //canTalk = false;
             //if (Input.GetKeyDown(KeyCode.T) && canTalk == true && isDialogueActive == false)
             //{
@@ -41,6 +47,7 @@ public class DialogueNPC : MonoBehaviour
             //    dialogueManager.StartDialogue(dialogue);
             //    //npcClickTo.DOFade(0f, 1f);
             //}
+
         }
     }
 
@@ -50,6 +57,9 @@ public class DialogueNPC : MonoBehaviour
         {
             //canTalk = true;
             inTalkingRange = false;
+            Debug.Log("We walking");
+
+
             //npcClickTo.DOFade(0f, 1f);
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
             dialogueManager.EndDialogue();

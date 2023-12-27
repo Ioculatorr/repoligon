@@ -5,13 +5,15 @@ using DG.Tweening;
 
 public class GunRotation : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
+    [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private float rotationAmount = 5f;
     [SerializeField] private float rotationSpeed = 10f;
 
     private Vector3 initialRotation;
+
+    private PlayerMovementRigid boolCheck;
 
     void Start()
     {
@@ -38,9 +40,9 @@ public class GunRotation : MonoBehaviour
         targetRotation.y += mouseX;
 
         // Add rotation based on vertical velocity when in freefall
-        if (!controller.isGrounded && controller.velocity.y < 0)
+        if (!boolCheck.isGrounded && rb.velocity.y < 0)
         {
-            float fallRotation = Mathf.Clamp(-controller.velocity.y * 2f, 0f, 30f); // Adjust the multiplier as needed
+            float fallRotation = Mathf.Clamp(-rb.velocity.y * 2f, 0f, 30f); // Adjust the multiplier as needed
             targetRotation.x = -fallRotation; // Reverse direction for freefall
         }
 

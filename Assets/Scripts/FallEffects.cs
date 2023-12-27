@@ -1,13 +1,12 @@
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 public class FallEffects : MonoBehaviour
 {
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Rigidbody rb;
     [SerializeField] private Volume postProcessVolume;
 
     [SerializeField] private float minFallingSpeed = 20f;
@@ -20,8 +19,6 @@ public class FallEffects : MonoBehaviour
     [SerializeField] private GameObject fallCamera;
 
     private float intensity;
-    //private PlayerMovement boolGrounded;
-    //private bool canStartCoroutine = true;
 
     private void Start()
     {
@@ -35,33 +32,20 @@ public class FallEffects : MonoBehaviour
 
     private void Update()
     {
-
-
-        //if (boolGrounded.isGrounded == false && canStartCoroutine == true)
-        //{
-        //    StartCoroutine(CameraFallShake());
-        //    canStartCoroutine = false;
-        //}
-        //else if(boolGrounded.isGrounded == true)
-        //{
-        //    StopCoroutine(CameraFallShake());
-        //    canStartCoroutine = true;
-        //}
-
-
-
-        if (characterController.velocity.y < -minFallingSpeed)
+        if (rb.velocity.y < -minFallingSpeed)
         {
-            float normalizedSpeed = Mathf.InverseLerp(-minFallingSpeed, -maxFallingSpeed, characterController.velocity.y);
-            intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
+            float normalizedSpeed = Mathf.InverseLerp(-minFallingSpeed, -maxFallingSpeed, rb.velocity.y);
+            intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed * 1.5f);
 
+            Debug.Log(normalizedSpeed.ToString());
         }
         else
         {
             // Player is not falling, set intensity to zero
             intensity = 0f;
         }
-            UpdateVignette();
+
+        UpdateVignette();
     }
 
     private void UpdateVignette()
@@ -72,13 +56,13 @@ public class FallEffects : MonoBehaviour
 
     IEnumerator CameraFallShake()
     {
-        while(true)
+        while (true)
         {
-                fallCamera.transform.DOShakeRotation(1f, intensity * 50f, 10, 15f, false)
-                                                    .SetLoops(-1, LoopType.Incremental)
-                                                    .SetEase(Ease.Linear);
+            fallCamera.transform.DOShakeRotation(1f, intensity * 50f, 10, 15f, false)
+                .SetLoops(-1, LoopType.Incremental)
+                .SetEase(Ease.Linear);
 
-                yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }
