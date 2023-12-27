@@ -12,7 +12,7 @@ public class SimpleShooting : MonoBehaviour
     [SerializeField] private Transform shootingPointRaycast;
 
     //[SerializeField] private float bulletSpeed = 100f;
-    [SerializeField] private float fireRate = 10f; // bullets per second
+    private float currentFireRate; // bullets per second
 
 
     [SerializeField] private ParticleSystem hitParticlePrefab;
@@ -20,9 +20,36 @@ public class SimpleShooting : MonoBehaviour
 
     private float nextFireTime = 0f;
 
-    [SerializeField] private UnityEvent onShoot;
 
+    [Header("Character")]
+
+
+    [SerializeField] private WeaponData scriptableObjectA;
+    [SerializeField] private WeaponData scriptableObjectB;
+
+    private WeaponData currentScriptableObject;
+    private GameObject spawnedPrefab;
+
+
+
+
+
+
+
+
+
+
+    [SerializeField] private UnityEvent onShoot;
     public static Action OnHitEnemy;
+
+
+
+
+    void Start()
+    {
+        // Initialize with the first ScriptableObject
+        SetScriptableObject(scriptableObjectA);
+    }
 
     void Update()
     {
@@ -30,7 +57,13 @@ public class SimpleShooting : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime)
         {
             Shoot();
-            nextFireTime = Time.time + 1f / fireRate;
+            nextFireTime = Time.time + 1f / currentFireRate;
+        }
+        // Check for input or any condition to switch between ScriptableObjects
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            // Toggle between the two ScriptableObjects
+            ToggleScriptableObject();
         }
     }
 
@@ -138,5 +171,50 @@ public class SimpleShooting : MonoBehaviour
 
         // Destroy the particle effect after its duration (adjust as needed)
         Destroy(hitParticleEnemy.gameObject, hitParticleEnemy.main.duration);
+    }
+
+    void ToggleScriptableObject()
+    {
+        // Destroy the current prefab if it exists
+        DestroySpawnedPrefab();
+
+        // Switch between ScriptableObjects
+        if (currentScriptableObject == scriptableObjectA)
+        {
+            SetScriptableObject(scriptableObjectB);
+        }
+        else
+        {
+            SetScriptableObject(scriptableObjectA);
+        }
+    }
+
+    void SetScriptableObject(WeaponData newScriptableObject)
+    {
+        // Set the current ScriptableObject and spawn its associated prefab
+        currentScriptableObject = newScriptableObject;
+
+        // For demonstration purposes, you can print some information
+        Debug.Log($"Switched to {currentScriptableObject.name}");
+
+        currentFireRate = currentScriptableObject.fireRate;
+
+
+
+
+        // Spawn the associated prefab
+        spawnedPrefab = Instantiate(currentScriptableObject.weaponPrefab, transform.position, Quaternion.identity);
+
+        spawnedPrefab.transform.parent = transform;
+        spawnedPrefab.layer = 12;
+    }
+
+    void DestroySpawnedPrefab()
+    {
+        // Destroy the previously spawned prefab if it exists
+        if (spawnedPrefab != null)
+        {
+            Destroy(spawnedPrefab);
+        }
     }
 }

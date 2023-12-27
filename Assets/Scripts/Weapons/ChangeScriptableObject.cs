@@ -50,6 +50,9 @@ public class ChangeScriptableObject : MonoBehaviour
 
         // Spawn the associated prefab
         spawnedPrefab = Instantiate(currentScriptableObject.weaponPrefab, transform.position, Quaternion.identity);
+
+        spawnedPrefab.transform.parent = transform;
+        spawnedPrefab.layer = 12;
     }
 
     void DestroySpawnedPrefab()

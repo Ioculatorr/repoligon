@@ -32711,7 +32711,7 @@ GameObject:
   m_Layer: 0
   m_Name: ChangeSO
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -49830,11 +49830,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a09ee715560fd4682e97faf9a72fb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPoint: {fileID: 1976889216}
   shootingPointRaycast: {fileID: 1654323542}
-  fireRate: 10
   hitParticlePrefab: {fileID: 1841878081}
   hitParticleEnemyPrefab: {fileID: 1952444959}
+  scriptableObjectA: {fileID: 11400000, guid: d8c77116fc409e340b27354dda0a33aa, type: 2}
+  scriptableObjectB: {fileID: 11400000, guid: 5fd3e46a5440c5a4f8b957f31a0cd1c4, type: 2}
   onShoot:
     m_PersistentCalls:
       m_Calls:

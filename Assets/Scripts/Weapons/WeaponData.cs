@@ -7,6 +7,5 @@ public class WeaponData : ScriptableObject
 {
     public GameObject weaponPrefab;
 
-    public float damage;
-    public float fireRate;
+    public float fireRate = 2f;
 }
