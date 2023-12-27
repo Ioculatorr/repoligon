@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueChanger : MonoBehaviour
 {
-    public DialogueData newDialogue;
+    public DialogueContainer newDialogue;
     [SerializeField] private GameObject changedNPC;
 
     private DialogueNPC npcInteraction;

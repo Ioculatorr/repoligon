@@ -6912,7 +6912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc13c53a807a16489deee81db2a1e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDialogue: {fileID: 11400000, guid: 46a03ec20e8ee6244b558cd2a61b51fc, type: 2}
+  initialDialogue: {fileID: 0}
   inTalkingRange: 0
   npcClickTo: {fileID: 82985775}
 --- !u!114 &521103488
@@ -7278,7 +7278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc13c53a807a16489deee81db2a1e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDialogue: {fileID: 11400000, guid: aec71e8baaccee84390c1d65e56231d8, type: 2}
+  initialDialogue: {fileID: 11400000, guid: 53c049d9fa97b6343af6fe9fc2fd10df, type: 2}
   inTalkingRange: 0
   npcClickTo: {fileID: 82985775}
 --- !u!1 &635696106
@@ -26344,7 +26344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccc13c53a807a16489deee81db2a1e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialDialogue: {fileID: 11400000, guid: 5e882b18b88230e4a9d5e988eb106d1d, type: 2}
+  initialDialogue: {fileID: 0}
   inTalkingRange: 0
   npcClickTo: {fileID: 82985775}
 --- !u!114 &1263411303
@@ -26842,7 +26842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb7b5ef401afba142bf26315fbdaac1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newDialogue: {fileID: 11400000, guid: 6a645dc59714e8647be1591ec676ffab, type: 2}
+  newDialogue: {fileID: 0}
   changedNPC: {fileID: 521103486}
 --- !u!1 &1404242036
 GameObject:

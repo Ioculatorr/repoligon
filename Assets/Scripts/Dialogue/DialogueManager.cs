@@ -51,13 +51,13 @@ public class DialogueManager : MonoBehaviour
         }
         SkipText();
 
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            StartDialogueContainer();
-        }
+        //if (Input.GetKeyDown(KeyCode.Tab))
+        //{
+        //    StartDialogueContainer();
+        //}
     }
 
-    public void StartDialogueContainer()
+    public void StartDialogueContainer(DialogueContainer dialogueContainer)
     {
         currentLine= 0;
         StartDialogue(dialogueContainer.dialogues[currentLine]);

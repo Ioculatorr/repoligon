@@ -3,8 +3,8 @@ using DG.Tweening;
 
 public class DialogueNPC : MonoBehaviour
 {
-    public DialogueData initialDialogue;
-    private DialogueData dialogue;
+    public DialogueContainer initialDialogue;
+    private DialogueContainer dialogue;
     public bool inTalkingRange;
     //private bool canTalk = true;
     [SerializeField] private CanvasGroup npcClickTo;
@@ -17,7 +17,7 @@ public class DialogueNPC : MonoBehaviour
         npcClickTo.alpha = 0f;
     }
 
-    public void ReplaceDialogue(DialogueData newDialogue)
+    public void ReplaceDialogue(DialogueContainer newDialogue)
     {
         // Replace the initial dialogue with the new one
         dialogue = newDialogue;
@@ -32,7 +32,7 @@ public class DialogueNPC : MonoBehaviour
             inTalkingRange = true;
 
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
-            dialogueManager.StartDialogue(dialogue);
+            dialogueManager.StartDialogueContainer(dialogue);
             //canTalk = false;
             //if (Input.GetKeyDown(KeyCode.T) && canTalk == true && isDialogueActive == false)
             //{

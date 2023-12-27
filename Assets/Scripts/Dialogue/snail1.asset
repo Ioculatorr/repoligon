@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
   m_Name: snail1
   m_EditorClassIdentifier: 
-  dialogueLines: 1
+  dialogueLines: 11111111111111111111111111111111111111111111111111111111
   characterSprite: {fileID: 0}
   characterName: 
   fontName: {fileID: 0}
