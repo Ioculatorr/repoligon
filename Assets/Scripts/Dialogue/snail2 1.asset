@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
   m_Name: snail2 1
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - spomge pob
+  dialogueLines: 3
+  characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}
+  characterName: Noone
+  fontName: {fileID: 0}
+  fontNameSize: 60
   font: {fileID: 11400000, guid: 370c8901590f78d468b6ddf0a428a875, type: 2}
   fontSize: 90
   fontAnimSpeed: 0.5
+  fontShake: 0
   fontShakePower: 30
-  fontShake: 1
   typingTalk: 1
   typingSound: {fileID: 8300000, guid: 7324b0fc13dcc634593b980ce243819c, type: 3}
   typingPitch: 1
-  characterSprite: {fileID: 21300000, guid: 541bb9484787ef748ad5c90e159e15d3, type: 3}

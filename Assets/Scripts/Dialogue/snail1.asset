@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
   m_Name: snail1
   m_EditorClassIdentifier: 
-  dialogueLines:
-  - kurdekurdekurdekurdekurdekurdekurdekurdekurdekurde
-  - "SO, Struck, jak to zrobi\u0107"
-  - "Cicha noc                           \u015Awi\u0119ta noc"
+  dialogueLines: 1
   characterSprite: {fileID: 0}
   characterName: 
   fontName: {fileID: 0}

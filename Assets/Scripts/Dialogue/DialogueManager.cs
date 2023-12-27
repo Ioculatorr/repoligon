@@ -14,11 +14,14 @@ public class DialogueManager : MonoBehaviour
 
     private int currentLine = 0;
     private DialogueData currentDialogue;
-    //private DialogueContainer dialogueContainer;
+    [SerializeField] private DialogueContainer dialogueContainer;
     private bool isAnimatingText = false;
     public bool isDialogueActive = false;
 
     [SerializeField] private AudioSource audioSource;
+
+    private float instantAnimSpeed = 0f;
+    bool useSkip = false;
 
     private void Start()
     {
@@ -38,6 +41,7 @@ public class DialogueManager : MonoBehaviour
             if (!isAnimatingText)
             {
                 ShowNextLine();
+
             }
             else if (currentLine >= currentDialogue.dialogueLines.Length)
             {
@@ -45,6 +49,18 @@ public class DialogueManager : MonoBehaviour
                 EndDialogue();
             }
         }
+        SkipText();
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            StartDialogueContainer();
+        }
+    }
+
+    public void StartDialogueContainer()
+    {
+        currentLine= 0;
+        StartDialogue(dialogueContainer.dialogues[currentLine]);
     }
 
     public void StartDialogue(DialogueData dialogue)
@@ -52,7 +68,6 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = ""; // Clear the text before starting a new dialogue
 
         currentDialogue = dialogue;
-        currentLine = 0;
 
         // Set the font of dialogueText using the font from the DialogueData
         dialogueText.font = currentDialogue.font;
@@ -79,11 +94,14 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowNextLine()
     {
-        if (!isAnimatingText && currentLine < currentDialogue.dialogueLines.Length)
+        useSkip = false;
+
+        if (!isAnimatingText && currentLine < dialogueContainer.dialogues.Length - 1)
         {
-            StartCoroutine(AnimateText());
+            currentLine++;
+            StartDialogue(dialogueContainer.dialogues[currentLine]);
         }
-        else if (!isAnimatingText && currentLine == currentDialogue.dialogueLines.Length)
+        else if (!isAnimatingText && currentLine >= dialogueContainer.dialogues.Length - 1)
         {
             EndDialogue();
         }
@@ -93,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     {
         isAnimatingText = true;
         dialogueText.text = "";
-        string line = currentDialogue.dialogueLines[currentLine];
+        string line = currentDialogue.dialogueLines;
 
         for (int i = 0; i < line.Length; i++)
         {
@@ -104,7 +122,7 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += currentChar;
 
 
-            if (currentChar != ' ' && currentDialogue.typingSound != null && currentDialogue.typingTalk == true)
+            if (currentChar != ' ' && currentDialogue.typingSound != null && currentDialogue.typingTalk == true && useSkip == false)
             {
                 audioSource.PlayOneShot(currentDialogue.typingSound); // Play typing sound
                 //currentDialogue.typingPitch = Random.Range(0.7f, 1.5f);
@@ -113,15 +131,19 @@ public class DialogueManager : MonoBehaviour
             if (currentDialogue.fontShake == true)
             {
                 dialogueText.transform.DOShakePosition(0.2f, currentDialogue.fontShakePower, 15, 10);
+
             }
 
-            yield return new WaitForSeconds(currentDialogue.fontAnimSpeed);
+
+            float waitTime = useSkip ? instantAnimSpeed : currentDialogue.fontAnimSpeed;
+
+            yield return new WaitForSeconds(waitTime);
+
+            //useSkip = false;
+
         }
 
         isAnimatingText = false;
-
-        // Increment currentLine after the animation is complete
-        currentLine++;
     }
 
 
@@ -136,5 +158,13 @@ public class DialogueManager : MonoBehaviour
 
         isDialogueActive = false;
 
+    }
+
+    private void SkipText()
+    {
+        if (Input.GetKey(KeyCode.R))
+        {
+            useSkip = true;
+        }
     }
 }
