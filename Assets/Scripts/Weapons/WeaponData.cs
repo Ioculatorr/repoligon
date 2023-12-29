@@ -8,4 +8,5 @@ public class WeaponData : ScriptableObject
     public GameObject weaponPrefab;
 
     public float fireRate = 2f;
+    public float maxDistance = 100f;
 }

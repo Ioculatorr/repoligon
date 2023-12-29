@@ -14,7 +14,7 @@ public class DialogueManager : MonoBehaviour
 
     private int currentLine = 0;
     private DialogueData currentDialogue;
-    [SerializeField] private DialogueContainer dialogueContainer;
+    private DialogueContainer receiveddialogueContainer;
     private bool isAnimatingText = false;
     public bool isDialogueActive = false;
 
@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
 
     private float instantAnimSpeed = 0f;
     bool useSkip = false;
+
 
     private void Start()
     {
@@ -59,7 +60,9 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogueContainer(DialogueContainer dialogueContainer)
     {
-        currentLine= 0;
+        receiveddialogueContainer = dialogueContainer;
+
+        currentLine = 0;
         StartDialogue(dialogueContainer.dialogues[currentLine]);
     }
 
@@ -96,12 +99,12 @@ public class DialogueManager : MonoBehaviour
     {
         useSkip = false;
 
-        if (!isAnimatingText && currentLine < dialogueContainer.dialogues.Length - 1)
+        if (!isAnimatingText && currentLine < receiveddialogueContainer.dialogues.Length - 1)
         {
             currentLine++;
-            StartDialogue(dialogueContainer.dialogues[currentLine]);
+            StartDialogue(receiveddialogueContainer.dialogues[currentLine]);
         }
-        else if (!isAnimatingText && currentLine >= dialogueContainer.dialogues.Length - 1)
+        else if (!isAnimatingText && currentLine >= receiveddialogueContainer.dialogues.Length - 1)
         {
             EndDialogue();
         }
@@ -131,7 +134,6 @@ public class DialogueManager : MonoBehaviour
             if (currentDialogue.fontShake == true)
             {
                 dialogueText.transform.DOShakePosition(0.2f, currentDialogue.fontShakePower, 15, 10);
-
             }
 
 

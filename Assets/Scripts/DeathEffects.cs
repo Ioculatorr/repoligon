@@ -7,18 +7,30 @@ public class DeathEffects : MonoBehaviour
     private AudioSource deathSounds;
     [SerializeField] private CanvasGroup deathCanvas;
 
+    private bool canDie = true;
+
     private void Start()
     {
         deathSounds = GetComponent<AudioSource>();
     }
 
-    public void deathSound()
+    public void deathEffects()
     {
-        deathSounds.Play();
+        if(canDie)
+        {
+            deathSounds.Play();
+            deathCanvas.alpha = 1.0f;
+            canDie = false;
+        }
     }
 
-    public void deathScreen()
-    {
-        deathCanvas.alpha = 1.0f;
-    }
+    //public void deathSound()
+    //{
+    //    deathSounds.Play();
+    //}
+
+    //public void deathScreen()
+    //{
+    //    deathCanvas.alpha = 1.0f;
+    //}
 }

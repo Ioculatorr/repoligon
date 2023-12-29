@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c817e7299088f2d4faab65a54d8ddafc, type: 3}
-  m_Name: ShotgunTest
+  m_Script: {fileID: 11500000, guid: 632fea012132d204eb7476663a17f508, type: 3}
+  m_Name: containertest2
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 3236003531309368892, guid: 515f9b8906e630247a0f6de444d9eb7f,
-    type: 3}
-  fireRate: 5
+  dialogues:
+  - {fileID: 11400000, guid: aec71e8baaccee84390c1d65e56231d8, type: 2}

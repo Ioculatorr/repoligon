@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.GlobalIllumination;
+using DG.Tweening;
 
 public class SimpleShooting : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class SimpleShooting : MonoBehaviour
 
     //[SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform shootingPointRaycast;
+    [SerializeField] private Transform cameraShake;
 
     //[SerializeField] private float bulletSpeed = 100f;
     private float currentFireRate; // bullets per second
@@ -29,6 +32,9 @@ public class SimpleShooting : MonoBehaviour
 
     private WeaponData currentScriptableObject;
     private GameObject spawnedPrefab;
+
+    private Tween gunShakeTween;
+
 
 
 
@@ -107,7 +113,7 @@ public class SimpleShooting : MonoBehaviour
         Ray ray = new Ray(shootingPointRaycast.position, shootingPointRaycast.forward);
 
         // Use a large distance for the raycast (adjust as needed)
-        float maxRaycastDistance = 100f;
+        float maxRaycastDistance = currentScriptableObject.maxDistance;
 
         // Check if the ray hits something
         if (Physics.Raycast(ray, out RaycastHit hit, maxRaycastDistance))
@@ -135,6 +141,7 @@ public class SimpleShooting : MonoBehaviour
             }
 
             onShoot.Invoke();
+            PlayPrefabEffects();
         }
         else
         {
@@ -143,6 +150,7 @@ public class SimpleShooting : MonoBehaviour
 
             // Invoke the shoot trigger event
             onShoot.Invoke();
+            PlayPrefabEffects();
         }
 
         // Visualize the ray in the Scene view (for debugging purposes)
@@ -203,7 +211,12 @@ public class SimpleShooting : MonoBehaviour
 
 
         // Spawn the associated prefab
-        spawnedPrefab = Instantiate(currentScriptableObject.weaponPrefab, transform.position, Quaternion.identity);
+        spawnedPrefab = Instantiate(currentScriptableObject.weaponPrefab, transform.position, transform.rotation);
+
+
+
+
+
 
         spawnedPrefab.transform.parent = transform;
         spawnedPrefab.layer = 12;
@@ -216,5 +229,59 @@ public class SimpleShooting : MonoBehaviour
         {
             Destroy(spawnedPrefab);
         }
+    }
+
+    void PlayPrefabEffects()
+    {
+        spawnedPrefab.GetComponentInChildren<AudioSource>().Play();
+        spawnedPrefab.GetComponentInChildren<ParticleSystem>().Emit(1);
+        spawnedPrefab.GetComponentInChildren<Light>().intensity = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
+        spawnedPrefab.GetComponentInChildren<Light>().range = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
+
+        Invoke("DisableLight", 0.05f);
+
+        ShootShake();
+        //ShootShakeGun();
+    }
+
+    private void ShootShake()
+    {
+                cameraShake.transform.DOShakeRotation(0.5f, 1.5f, 6, 15f, true)
+        .OnComplete(() =>
+        {
+            cameraShake.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
+        });
+    }
+
+    private void DisableLight()
+    {
+        spawnedPrefab.GetComponentInChildren<Light>().intensity = 0f;
+    }
+
+    private void ShootShakeGun()
+    {
+        // Ensure the previous tween is killed before starting a new one
+        if (gunShakeTween != null && gunShakeTween.IsActive())
+        {
+            gunShakeTween.Kill();
+        }
+
+        // Create a new reusable tween instance
+        gunShakeTween = DOTween.Sequence()
+            .Append(spawnedPrefab.transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f))
+            .Append(spawnedPrefab.transform.DOPunchPosition(new Vector3(0, 0, -0.1f), 0.5f, 10, 0f, false))
+            .OnComplete(() =>
+            {
+                // Reset the gun position and rotation
+                spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.5f);
+                spawnedPrefab.transform.DOLocalMove(new Vector3(0, 0, 0), 0.5f);
+            });
+
+        // Set the reuse option for the tween
+        gunShakeTween.SetRecyclable(true);
+        gunShakeTween.SetAutoKill(false);
+
+        // Start the tween
+        gunShakeTween.Restart();
     }
 }

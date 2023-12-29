@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c817e7299088f2d4faab65a54d8ddafc, type: 3}
-  m_Name: SniperTest
+  m_Name: RifleTest
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 1494896023069001336, guid: 9a23c716d20d74e408690e53d7f227e4,
+  weaponPrefab: {fileID: 3236003531309368892, guid: 515f9b8906e630247a0f6de444d9eb7f,
     type: 3}
-  fireRate: 0.5
-  maxDistance: 50
+  fireRate: 10
+  maxDistance: 20

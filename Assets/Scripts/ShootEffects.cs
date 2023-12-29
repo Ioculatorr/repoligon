@@ -5,29 +5,34 @@ using DG.Tweening;
 
 public class ShootEffects : MonoBehaviour
 {
-    private AudioSource shootSounds;
-    private Transform shootShake;
-    private Light shootLight;
-    private ParticleSystem shootParticle;
+    [SerializeField] private AudioSource shootSounds;
+    [SerializeField] private Light shootLight;
+
+    [SerializeField] private Transform shootShake;
+
+    [SerializeField] private ParticleSystem shootParticle;
+    [SerializeField] private ParticleSystem shootParticleBullet;
 
     [SerializeField] private GameObject gun;
-    [SerializeField] private ParticleSystem shootParticleBullet;
 
     private Tween gunShakeTween;
 
-    private void Start()
+    public void ShootEffectsRifle()
     {
-        shootSounds = GetComponent<AudioSource>();
-        shootShake = GetComponent<Transform>();
-        shootLight = GetComponentInChildren<Light>();
+        ShootAudio();
+        ShootLight();
+        ShootShake();
+        ShootShakeGun();
+        ShootParticle();
+        ShootParticleBullet();
     }
 
-    public void ShootAudio()
+    private void ShootAudio()
     {
         shootSounds.Play();
     }
 
-    public void ShootShake()
+    private void ShootShake()
     {
         shootShake.transform.DOShakeRotation(0.5f, 1.5f, 6, 15f, true)
         .OnComplete(() =>
@@ -36,7 +41,7 @@ public class ShootEffects : MonoBehaviour
         });
     }
 
-    public void ShootShakeGun()
+    private void ShootShakeGun()
     {
         // Ensure the previous tween is killed before starting a new one
         if (gunShakeTween != null && gunShakeTween.IsActive())
@@ -47,7 +52,7 @@ public class ShootEffects : MonoBehaviour
         // Create a new reusable tween instance
         gunShakeTween = DOTween.Sequence()
             .Append(gun.gameObject.transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f))
-            .Join(gun.gameObject.transform.DOPunchPosition(new Vector3(0, 0, -0.1f), 0.5f, 10, 0f, false))
+            .Append(gun.gameObject.transform.DOPunchPosition(new Vector3(0, 0, -0.1f), 0.5f, 10, 0f, false))
             .OnComplete(() =>
             {
                 // Reset the gun position and rotation
@@ -62,17 +67,17 @@ public class ShootEffects : MonoBehaviour
         // Start the tween
         gunShakeTween.Restart();
     }
-    public void ShootParticle()
+    private void ShootParticle()
     {
         shootParticle.Emit(1);
     }
 
-    public void ShootParticleBullet()
+    private void ShootParticleBullet()
     {
         shootParticleBullet.GetComponent<ParticleSystem>().Emit(1);
     }
 
-    public void ShootLight()
+    private void ShootLight()
     {
         shootLight.intensity = Mathf.RoundToInt(Random.Range(2.5f, 5f));
         shootLight.range = Mathf.RoundToInt(Random.Range(2.5f, 5f));

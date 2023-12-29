@@ -48,13 +48,10 @@ public class FallEffects : MonoBehaviour
         //    canStartCoroutine = true;
         //}
 
-
-
-        if (characterController.velocity.y < -minFallingSpeed)
+        if (characterController.velocity.magnitude > minFallingSpeed)
         {
-            float normalizedSpeed = Mathf.InverseLerp(-minFallingSpeed, -maxFallingSpeed, characterController.velocity.y);
+            float normalizedSpeed = Mathf.InverseLerp(minFallingSpeed, maxFallingSpeed, characterController.velocity.magnitude);
             intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
-
         }
         else
         {
