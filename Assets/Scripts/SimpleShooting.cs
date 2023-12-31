@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.GlobalIllumination;
 using DG.Tweening;
+using static Dreamteck.Splines.ParticleController;
 
 public class SimpleShooting : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SimpleShooting : MonoBehaviour
     //[SerializeField] private Transform shootingPoint;
     [SerializeField] private Transform shootingPointRaycast;
     [SerializeField] private Transform cameraShake;
+    [SerializeField] private AudioSource weaponAudio;
 
     //[SerializeField] private float bulletSpeed = 100f;
     private float currentFireRate; // bullets per second
@@ -20,11 +22,12 @@ public class SimpleShooting : MonoBehaviour
 
     [SerializeField] private ParticleSystem hitParticlePrefab;
     [SerializeField] private ParticleSystem hitParticleEnemyPrefab;
+    [SerializeField] private ParticleSystem bulletParticle;
 
     private float nextFireTime = 0f;
 
 
-    [Header("Character")]
+    [Header("Weapons")]
 
 
     [SerializeField] private WeaponData scriptableObjectA;
@@ -120,6 +123,8 @@ public class SimpleShooting : MonoBehaviour
         {
             // Access the hit point
             Vector3 hitPoint = hit.point;
+
+            BulletEmit(hitPoint);
 
             GameObject hitObject = hit.collider.gameObject;
 
@@ -233,7 +238,10 @@ public class SimpleShooting : MonoBehaviour
 
     void PlayPrefabEffects()
     {
-        spawnedPrefab.GetComponentInChildren<AudioSource>().Play();
+        weaponAudio.clip = currentScriptableObject.audio;
+        weaponAudio.Play();
+
+        //spawnedPrefab.GetComponentInChildren<AudioSource>().Play();
         spawnedPrefab.GetComponentInChildren<ParticleSystem>().Emit(1);
         spawnedPrefab.GetComponentInChildren<Light>().intensity = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
         spawnedPrefab.GetComponentInChildren<Light>().range = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
@@ -241,7 +249,7 @@ public class SimpleShooting : MonoBehaviour
         Invoke("DisableLight", 0.05f);
 
         ShootShake();
-        //ShootShakeGun();
+        ShootShakeGun();
     }
 
     private void ShootShake()
@@ -260,28 +268,22 @@ public class SimpleShooting : MonoBehaviour
 
     private void ShootShakeGun()
     {
-        // Ensure the previous tween is killed before starting a new one
-        if (gunShakeTween != null && gunShakeTween.IsActive())
+                spawnedPrefab.transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f)
+        .OnComplete(() =>
         {
-            gunShakeTween.Kill();
-        }
+        spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
+        });
+    }
 
-        // Create a new reusable tween instance
-        gunShakeTween = DOTween.Sequence()
-            .Append(spawnedPrefab.transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f))
-            .Append(spawnedPrefab.transform.DOPunchPosition(new Vector3(0, 0, -0.1f), 0.5f, 10, 0f, false))
-            .OnComplete(() =>
-            {
-                // Reset the gun position and rotation
-                spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.5f);
-                spawnedPrefab.transform.DOLocalMove(new Vector3(0, 0, 0), 0.5f);
-            });
+    private void BulletEmit(Vector3 hitPoint)
+    {
+        // Get the direction from the shooting point to the hit point
+        Vector3 direction = (hitPoint - bulletParticle.transform.position).normalized;
 
-        // Set the reuse option for the tween
-        gunShakeTween.SetRecyclable(true);
-        gunShakeTween.SetAutoKill(false);
+        // Set the rotation of the particle system towards the hit point
+        bulletParticle.transform.rotation = Quaternion.LookRotation(direction);
 
-        // Start the tween
-        gunShakeTween.Restart();
+        // Play the particle effect
+        bulletParticle.Emit(1);
     }
 }

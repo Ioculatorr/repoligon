@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 3236003531309368892, guid: 515f9b8906e630247a0f6de444d9eb7f,
     type: 3}
+  audio: {fileID: 8300000, guid: 28965d989a5a2a74fad80b558db2c4b9, type: 3}
   fireRate: 10
-  maxDistance: 20
+  maxDistance: 200

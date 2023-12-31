@@ -5,11 +5,28 @@ using UnityEngine;
 
 public class Syzyf : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private Transform[] waypoints;
+    [SerializeField] private float totalDuration = 10f; // Total duration for the entire path
+    [SerializeField] private float snapSpeed = 1f;
+
     void Start()
     {
-        transform.DOLocalMove(new Vector3(0f, 0f, 10f), 10f)
-    .SetLoops(-1, LoopType.Incremental)
-    .SetEase(Ease.Linear);
+        // Create a sequence for the path animation
+        Sequence pathSequence = DOTween.Sequence();
+
+        // Add waypoints to the sequence
+        foreach (Transform waypoint in waypoints)
+        {
+            float segmentDuration = totalDuration / waypoints.Length;
+
+            // Move to the waypoint with a segment duration
+            pathSequence.Append(transform.DOMove(waypoint.position, segmentDuration).SetEase(Ease.Linear));
+
+            // Rotate to face the next waypoint with a segment duration
+            pathSequence.Join(transform.DOLookAt(waypoint.position, snapSpeed).SetEase(Ease.Linear));
+        }
+
+        // Set the loop type (optional)
+        pathSequence.SetLoops(-1, LoopType.Restart);
     }
 }

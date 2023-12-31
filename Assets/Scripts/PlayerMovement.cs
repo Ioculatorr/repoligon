@@ -1,18 +1,27 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController characterController;
+    [SerializeField] private GameObject playerCam;
+
+    [Header("Movement")]
 
     [SerializeField] private float speed = 12f;
     [SerializeField] private float gravity = -9.81f;
 
+    [Header("Jumping")]
+
     [SerializeField] private float jumpHeight = 5f;
     [SerializeField] private float jumpCooldown = 1.0f;
+
+    [Header("Dashing")]
 
     [SerializeField] private float dashSpeed = 24f;
     [SerializeField] private float dashTime = 0.5f; // Dash duration
@@ -20,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 
     private float lastJumpTime;
     private float lastDashTime;
+
+    private float currentSpeed;
+    private float targetSpeed;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -41,29 +53,39 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        RaycastHit hit;
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, out hit, groundDistance, groundMask);
 
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if(isGrounded && velocity.y < 0 )
+        if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
         }
+
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
 
+        // Accelerate towards the target speed
+        //currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, acceleration * Time.deltaTime);
+
         characterController.Move(move * speed * Time.deltaTime);
+
+        //Debug.Log(currentSpeed);
 
         velocity.y += gravity * Time.deltaTime;
 
         characterController.Move(velocity * Time.deltaTime);
+
+
+
 
         // Check if enough time has passed since the last jump
         if (Time.time - lastJumpTime >= jumpCooldown)
@@ -96,13 +118,23 @@ public class PlayerMovement : MonoBehaviour
         {
             float fallDistance = fallStartY - transform.position.y;
 
-            Debug.Log(fallDistance.ToString());
 
-            if (fallDistance > 0 && fallDistance >= minFallDistance && canDie == true)
+
+            //Debug.Log(fallDistance.ToString());
+
+            if (fallDistance >= 0 && fallDistance >= minFallDistance && canDie == true)
             {
                 fallDeathEvent.Invoke();
                 this.enabled = false;
                 canDie = false;
+            }
+            else if (fallDistance >= 5f)
+            {
+                playerCam.transform.DOShakeRotation(1f, fallDistance, 10, 15f, true)
+                            .OnComplete(() =>
+                            {
+                                playerCam.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
+                            });
             }
 
             fallStartY = 0f;
@@ -115,7 +147,6 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             this.GetComponent<AudioSource>().Play();
-
             // Update the last jump time
             lastJumpTime = Time.time;
         }

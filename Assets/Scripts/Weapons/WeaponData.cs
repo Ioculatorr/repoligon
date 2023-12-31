@@ -6,6 +6,7 @@ using UnityEngine;
 public class WeaponData : ScriptableObject
 {
     public GameObject weaponPrefab;
+    public AudioClip audio;
 
     public float fireRate = 2f;
     public float maxDistance = 100f;

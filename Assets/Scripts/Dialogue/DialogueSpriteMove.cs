@@ -13,7 +13,7 @@ public class DialogueSpriteMove : MonoBehaviour
 
     IEnumerator SpriteShake()
     {
-        this.gameObject.transform.DOShakePosition(1f, 3f, 15, 3f);
+        this.gameObject.transform.DOShakePosition(1f, 3f, 3, 3f);
         
         yield return new WaitForSeconds(0.2f);
         StartCoroutine(SpriteShake());

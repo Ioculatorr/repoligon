@@ -16,10 +16,13 @@ public class FallEffects : MonoBehaviour
     [SerializeField] private float maxVignetteIntensity = 0.5f;
 
     private Vignette vignette;
+    private ColorAdjustments colorAdjustments; 
+
     [SerializeField] private AudioSource fallAudio;
     [SerializeField] private GameObject fallCamera;
 
     private float intensity;
+
     //private PlayerMovement boolGrounded;
     //private bool canStartCoroutine = true;
 
@@ -30,6 +33,11 @@ public class FallEffects : MonoBehaviour
         {
             // You can access other post-processing effects in a similar way
             // For example: postProcessVolume.profile.TryGet(out Bloom bloom);
+        }
+
+                if (postProcessVolume.profile.TryGet(out colorAdjustments))
+        {
+            // Access other color adjustments if needed
         }
     }
 
@@ -48,9 +56,10 @@ public class FallEffects : MonoBehaviour
         //    canStartCoroutine = true;
         //}
 
-        if (characterController.velocity.magnitude > minFallingSpeed)
+
+        if (Mathf.Abs(characterController.velocity.y) > minFallingSpeed)
         {
-            float normalizedSpeed = Mathf.InverseLerp(minFallingSpeed, maxFallingSpeed, characterController.velocity.magnitude);
+            float normalizedSpeed = Mathf.InverseLerp(minFallingSpeed, maxFallingSpeed, Mathf.Abs(characterController.velocity.y));
             intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
         }
         else
@@ -58,13 +67,18 @@ public class FallEffects : MonoBehaviour
             // Player is not falling, set intensity to zero
             intensity = 0f;
         }
-            UpdateVignette();
+        UpdateIntensity();
+
+        //Debug.Log(intensity);
     }
 
-    private void UpdateVignette()
+    private void UpdateIntensity()
     {
-        vignette.intensity.value = intensity;
+        //vignette.intensity.value = intensity;
         fallAudio.volume = intensity * 2;
+
+        colorAdjustments.saturation.value = -intensity * 200f;
+        colorAdjustments.postExposure.value = intensity;
     }
 
     IEnumerator CameraFallShake()
@@ -72,10 +86,14 @@ public class FallEffects : MonoBehaviour
         while(true)
         {
                 fallCamera.transform.DOShakeRotation(1f, intensity * 50f, 10, 15f, false)
-                                                    .SetLoops(-1, LoopType.Incremental)
-                                                    .SetEase(Ease.Linear);
+                                                    .SetEase(Ease.Linear)
 
-                yield return new WaitForSeconds(0.25f);
+                        .OnComplete(() =>
+                        {
+                            fallCamera.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
+                        });
+
+            yield return new WaitForSeconds(0.25f);
         }
     }
 }
