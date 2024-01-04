@@ -25,3 +25,4 @@ MonoBehaviour:
   typingTalk: 1
   typingSound: {fileID: 0}
   typingPitch: 1
+  instantTransition: 1

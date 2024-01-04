@@ -34,5 +34,6 @@ public class DialogueData : ScriptableObject
     public bool typingTalk = true;
     public AudioClip typingSound; // Reference to the typing sound
     [Range(0.5f, 1.5f), Tooltip("Typing pitch with 2 decimal places")] public float typingPitch = 1f;
+    public bool instantTransition = false;
 
 }

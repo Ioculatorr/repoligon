@@ -2,45 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Unity.Mathematics;
 
 public class LookAtPlayer : MonoBehaviour
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject target;
     [SerializeField, Range(4,20f)] private float sightRange;
 
     [SerializeField, Range(0.1f, 1f)] private float lookAtSpeed = 1f;
 
-    private void Start()
-    {
-        StartCoroutine(LookAfterSeconds());
-    }
-
     IEnumerator LookAfterSeconds()
     {
-        if (IsPlayerInSight())
+        while (true)
         {
-            transform.DOLookAt(player.transform.position, lookAtSpeed);
+            //if (IsPlayerInSight())
+            //{
+            //    transform.DOLookAt(player.transform.position, lookAtSpeed);
 
-            //this.transform.DOShakeRotation(0.2f, 15f, 2, 10f);
+            //    //this.transform.DOShakeRotation(0.2f, 15f, 2, 10f);
 
+            //}
+
+            target.transform.DOLookAt(player.transform.position, lookAtSpeed);
+            yield return new WaitForSeconds(0.2f);
         }
-
-        yield return new WaitForSeconds(0.2f);
-
-        StartCoroutine(LookAfterSeconds());
     }
 
-    private void OnDrawGizmosSelected()
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireSphere(transform.position, sightRange);
+    //}
+
+    //bool IsPlayerInSight()
+    //{
+
+    //    // Check if the player is within the sight range
+    //    float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+    //    return distanceToPlayer < sightRange;
+    //}
+
+    private void OnTriggerEnter(Collider other)
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        if (other.gameObject.layer == 7)
+        {
+            StartCoroutine(LookAfterSeconds());
+        }
     }
 
-    bool IsPlayerInSight()
+    private void OnTriggerExit(Collider other)
     {
-
-        // Check if the player is within the sight range
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
-        return distanceToPlayer < sightRange;
+        if (other.gameObject.layer== 7)
+        {
+            StopAllCoroutines();
+            target.transform.DORotateQuaternion(Quaternion.identity, lookAtSpeed);
+        }
     }
 }

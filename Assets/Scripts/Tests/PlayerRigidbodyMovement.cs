@@ -4,7 +4,7 @@ public class PlayerRigidbodyMovement : MonoBehaviour
 {
     public float movementSpeed = 5f;
     public float rotationSpeed = 2f;
-    public float jumpForce = 8f;
+    public float jumpForce = 15f;
     public float jumpCooldown = 1.0f;
 
     public float groundRaycastDistance = 0.2f;

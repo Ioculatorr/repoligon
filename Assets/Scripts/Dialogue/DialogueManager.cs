@@ -50,6 +50,10 @@ public class DialogueManager : MonoBehaviour
                 EndDialogue();
             }
         }
+        if (currentDialogue.instantTransition == true && !isAnimatingText && isDialogueActive == true)
+        {
+            ShowNextLine();
+        }
         SkipText();
 
         //if (Input.GetKeyDown(KeyCode.Tab))

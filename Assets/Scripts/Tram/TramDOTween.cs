@@ -1,6 +1,4 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,10 +7,12 @@ public class TramDOTween : MonoBehaviour
     public Transform[] waypoints; // Reference to the waypoints attached to the platform
     public float duration = 5f;   // Duration of the movement along the path
 
-    private void Start()
+    private void Update()
     {
-        // Call a method to start the movement
-        StartSplineMovement();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            StartSplineMovement();
+        }
     }
 
     private void OnDrawGizmos()
@@ -24,19 +24,22 @@ public class TramDOTween : MonoBehaviour
     private void StartSplineMovement()
     {
         // Create a path using the waypoints
-        Vector3[] path = new Vector3[waypoints.Length];
+        Vector3[] path = new Vector3[waypoints.Length + 1]; // Increased array size by 1
         for (int i = 0; i < waypoints.Length; i++)
         {
             path[i] = waypoints[i].position;
         }
 
+        // Add the first waypoint at the end to close the path
+        path[path.Length - 1] = waypoints[0].position;
+
         // Move the platform along the path using DOTween
         transform.DOPath(path, duration, PathType.CatmullRom)
-            .SetOptions(false)
-            .SetLookAt(0.001f)
-            .SetEase(Ease.Linear)
-            .SetLoops(-1, LoopType.Yoyo);
-            //.OnComplete(OnPathComplete); // You can add a callback for completion if needed
+            .SetOptions(true, AxisConstraint.Y)
+            .SetLookAt(0.001f);
+            //.SetEase(Ease.Linear)
+            //.SetLoops(-1, LoopType.Yoyo);
+        //.OnComplete(OnPathComplete); // You can add a callback for completion if needed
     }
 
     private void OnPathComplete()
@@ -54,10 +57,10 @@ public class TramDOTween : MonoBehaviour
             Handles.DrawLine(waypoints[i].position, waypoints[i + 1].position);
         }
 
-        // Optionally, connect the last waypoint to the first one
-        if (waypoints.Length > 1)
-        {
-            Handles.DrawLine(waypoints[waypoints.Length - 1].position, waypoints[0].position);
-        }
+        // Connect the last waypoint to the first one to close the path
+        //if (waypoints.Length > 1)
+        //{
+        //    Handles.DrawLine(waypoints[waypoints.Length - 1].position, waypoints[0].position);
+        //}
     }
 }
