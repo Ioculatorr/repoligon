@@ -14,7 +14,7 @@ public class DialogueNPC : MonoBehaviour
     public void Start()
     {
         dialogueToSent = initialDialogue;
-        npcClickTo.alpha = 0f;
+        //npcClickTo.alpha = 0f;
     }
 
     public void ReplaceDialogue(DialogueContainer newDialogue)

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Experimental.GlobalIllumination;
 using DG.Tweening;
+using Unity.VisualScripting;
 using static Dreamteck.Splines.ParticleController;
 
 public class SimpleShooting : MonoBehaviour
@@ -49,9 +50,15 @@ public class SimpleShooting : MonoBehaviour
 
 
     [SerializeField] private UnityEvent onShoot;
+    
+    
+    [SerializeField] private UnityEvent KilledYourself;
+    [SerializeField] private AudioClip suicideSound;
+    bool AimAtYourself = false;
+    
     public static Action OnHitEnemy;
 
-
+    private bool PickedUpSmth = false;
 
 
     void Start()
@@ -63,16 +70,21 @@ public class SimpleShooting : MonoBehaviour
     void Update()
     {
         // Check for user input (e.g., space key) to trigger shooting
-        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime)
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime && !PickedUpSmth)
         {
             Shoot();
             nextFireTime = Time.time + 1f / currentFireRate;
         }
         // Check for input or any condition to switch between ScriptableObjects
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q)&& !PickedUpSmth)
         {
             // Toggle between the two ScriptableObjects
             ToggleScriptableObject();
+        }
+        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth)
+        {
+            // Kill yourself
+            LifeRestart();
         }
     }
 
@@ -112,6 +124,15 @@ public class SimpleShooting : MonoBehaviour
 
     void Shoot()
     {
+        if (Input.GetKeyDown(KeyCode.Mouse0) && AimAtYourself == true)
+        {
+            KilledYourself.Invoke();
+        }
+        
+        
+        
+        
+        
         // Cast a ray from the shooting point forward
         Ray ray = new Ray(shootingPointRaycast.position, shootingPointRaycast.forward);
 
@@ -285,5 +306,26 @@ public class SimpleShooting : MonoBehaviour
 
         // Play the particle effect
         bulletParticle.Emit(1);
+    }
+
+    private void LifeRestart()
+    {
+        AimAtYourself = true;
+        this.AddComponent<AudioSource>().PlayOneShot(suicideSound);
+        Destroy(this.GetComponent<AudioSource>(), suicideSound.length);
+        spawnedPrefab.transform.DOLookAt(cameraShake.transform.position, 0.2f);
+        
+    }
+
+    public void HideWeaponOnPickUp()
+    {
+        PickedUpSmth = true;
+        DestroySpawnedPrefab();
+    }
+    
+    public void SpawnWeaponOnDropOff()
+    {
+        PickedUpSmth = false;
+        SetScriptableObject(scriptableObjectA);
     }
 }
