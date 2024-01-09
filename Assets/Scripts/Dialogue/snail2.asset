@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: snail2
   m_EditorClassIdentifier: 
   dialogueLines: 222222222222222222222222222222222222222222222
-  characterSprite: {fileID: 0}
+  characterSprite: {fileID: 21300000, guid: b2227358fc104bf44a403a9202dd0130, type: 3}
   characterName: 
   fontName: {fileID: 0}
   fontNameSize: 60

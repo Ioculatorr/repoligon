@@ -3,40 +3,81 @@ using UnityEngine;
 
 public class PhotoHandler : MonoBehaviour
 {
-    //public Camera snapshotCamera;
-    private Sprite snapshotSprite;
-    [SerializeField] private GameObject targetPhoto;
-
-    private Texture2D screenCapture;
+    // //public Camera snapshotCamera;
     
-    private void Start()
-    {
-        screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-    }
+private Sprite snapshotSprite;
+[SerializeField] private GameObject targetPhoto;
+
+    //
+    // private Texture2D screenCapture;
+    //
+    // private void Start()
+    // {
+    //     screenCapture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+    // }
+    //
+    // void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.P))
+    //     {
+    //         StartCoroutine(CaptureSnapshot());
+    //     }
+    // }
+    //
+    // IEnumerator CaptureSnapshot()
+    // {
+    //     yield return new WaitForEndOfFrame();
+    //
+    //     Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
+    //     
+    //     screenCapture.ReadPixels(regionToRead, 0, 0, false);
+    //     screenCapture.Apply();
+    //     ShowPhoto();
+    // }
+    //
+    // void ShowPhoto()
+    // {
+    //     snapshotSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100f);
+    //     targetPhoto.GetComponent<SpriteRenderer>().sprite = snapshotSprite;
+    // }
+
+    [SerializeField] private RenderTexture renderTexture;
+    [SerializeField] private AudioSource photoAudio;
+    [SerializeField] private Light photoLight;
 
     void Update()
     {
+        // Example: Call ReadPixels when a specific key is pressed (e.g., space bar)
         if (Input.GetKeyDown(KeyCode.P))
         {
-            StartCoroutine(CaptureSnapshot());
+            ReadPixelsFromRenderTexture(renderTexture);
         }
     }
 
-    IEnumerator CaptureSnapshot()
+    void ReadPixelsFromRenderTexture(RenderTexture rt)
     {
-        yield return new WaitForEndOfFrame();
+        // Create a Texture2D to read pixels into
+        Texture2D texture = new Texture2D(rt.width, rt.height, TextureFormat.RGB24, false);
 
-        Rect regionToRead = new Rect(0, 0, Screen.width, Screen.height);
+        // Set the target render texture
+        RenderTexture.active = rt;
+
+        // Read pixels from the render texture to the Texture2D
+        texture.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+        texture.Apply();
         
-        screenCapture.ReadPixels(regionToRead, 0, 0, false);
-        screenCapture.Apply();
-        ShowPhoto();
+        snapshotSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
+        targetPhoto.GetComponent<SpriteRenderer>().sprite = snapshotSprite;
+        
+        
+
+        // Reset the active render texture
+        RenderTexture.active = null;
     }
 
-    void ShowPhoto()
+    void PhotoEffects()
     {
-        snapshotSprite = Sprite.Create(screenCapture, new Rect(0.0f, 0.0f, screenCapture.width, screenCapture.height), new Vector2(0.5f, 0.5f), 100f);
-        targetPhoto.GetComponent<SpriteRenderer>().sprite = snapshotSprite;
+        
     }
 }
 

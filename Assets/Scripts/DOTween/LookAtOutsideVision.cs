@@ -7,7 +7,7 @@ public class LookAtOutsideVision : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     [SerializeField] private Camera cameraFOV;
-    [SerializeField] private float playerFieldOfVision = 90f;
+    //[SerializeField] private float playerFieldOfVision = 90f;
     [SerializeField, Range(4,20f)] private float sightRange;
 
     [SerializeField, Range(0.1f, 1f)] private float lookAtSpeed = 1f;

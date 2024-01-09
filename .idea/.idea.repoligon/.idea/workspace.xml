@@ -37,7 +37,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../GameBuilds/Repoligon\repoligon.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../GameBuilds/Repoligon/repoligon.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\moje_bagno\unity_projects\GameBuilds\Repoligon" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -97,6 +97,10 @@
       <workItem from="1704480393099" duration="1199000" />
       <workItem from="1704492503806" duration="4215000" />
       <workItem from="1704524770278" duration="10178000" />
+      <workItem from="1704671015057" duration="5962000" />
+      <workItem from="1704704219090" duration="3069000" />
+      <workItem from="1704714875718" duration="203000" />
+      <workItem from="1704734532794" duration="10628000" />
     </task>
     <servers />
   </component>

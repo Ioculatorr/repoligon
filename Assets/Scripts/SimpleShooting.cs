@@ -81,10 +81,14 @@ public class SimpleShooting : MonoBehaviour
             // Toggle between the two ScriptableObjects
             ToggleScriptableObject();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth)
+        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth && !AimAtYourself)
         {
             // Kill yourself
             LifeRestart();
+        }
+        else if (Input.GetKeyDown((KeyCode.R)) && !PickedUpSmth && AimAtYourself)
+        {
+            LifeChangeMind();
         }
     }
 
@@ -314,7 +318,12 @@ public class SimpleShooting : MonoBehaviour
         this.AddComponent<AudioSource>().PlayOneShot(suicideSound);
         Destroy(this.GetComponent<AudioSource>(), suicideSound.length);
         spawnedPrefab.transform.DOLookAt(cameraShake.transform.position, 0.2f);
-        
+    }
+
+    private void LifeChangeMind()
+    {
+        AimAtYourself = false;
+        spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.2f);
     }
 
     public void HideWeaponOnPickUp()

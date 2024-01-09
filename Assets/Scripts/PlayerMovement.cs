@@ -26,6 +26,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 24f;
     [SerializeField] private float dashTime = 0.5f; // Dash duration
     [SerializeField] private float dashCooldown = 3.0f;  // Dash cooldown
+    
+    [Header("Audio")]
+    
+    [SerializeField] private AudioSource jumpAudio;
+    [SerializeField] private AudioSource footstepAudio;
+    [SerializeField] private AudioClip[] footstepClips;
 
     private float lastJumpTime;
     private float lastDashTime;
@@ -53,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCoroutine(FootstepsSound());
     }
 
     // Update is called once per frame
@@ -78,13 +84,10 @@ public class PlayerMovement : MonoBehaviour
 
         characterController.Move(move * speed * Time.deltaTime);
 
-        //Debug.Log(currentSpeed);
-
         velocity.y += gravity * Time.deltaTime;
 
         characterController.Move(velocity * Time.deltaTime);
-
-
+        
 
 
         // Check if enough time has passed since the last jump
@@ -128,9 +131,9 @@ public class PlayerMovement : MonoBehaviour
                 this.enabled = false;
                 canDie = false;
             }
-            else if (fallDistance >= 5f)
+            else if (fallDistance >= 0.1f)
             {
-                playerCam.transform.DOShakeRotation(1f, fallDistance, 10, 15f, true)
+                playerCam.transform.DOShakeRotation(1f, fallDistance * 2f, 6, 15f, true)
                             .OnComplete(() =>
                             {
                                 playerCam.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
@@ -146,7 +149,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButton("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            this.GetComponent<AudioSource>().Play();
+            //this.GetComponent<AudioSource>().Play();
+            jumpAudio.Play();
+            
             // Update the last jump time
             lastJumpTime = Time.time;
         }
@@ -179,5 +184,20 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //isDashing = false;
+    }
+
+    IEnumerator FootstepsSound()
+    {
+        while (true)
+        {
+            // Check if the player is moving and grounded to play footsteps sound
+            if (isGrounded && (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
+            {
+                // Play the footstep sound
+                AudioClip clip = footstepClips[UnityEngine.Random.Range(0, footstepClips.Length)];
+                footstepAudio.PlayOneShot(clip);
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

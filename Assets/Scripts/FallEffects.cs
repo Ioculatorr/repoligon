@@ -35,7 +35,7 @@ public class FallEffects : MonoBehaviour
             // For example: postProcessVolume.profile.TryGet(out Bloom bloom);
         }
 
-                if (postProcessVolume.profile.TryGet(out colorAdjustments))
+        if (postProcessVolume.profile.TryGet(out colorAdjustments))
         {
             // Access other color adjustments if needed
         }
