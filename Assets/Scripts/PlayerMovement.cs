@@ -15,6 +15,12 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float speed = 12f;
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float dampLength;
+    private float damp;
+    [SerializeField] private AnimationCurve dampCurve;
+    private Vector3 previousDirection;
+    
+    
 
     [Header("Jumping")]
 
@@ -25,7 +31,10 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float dashSpeed = 24f;
     [SerializeField] private float dashTime = 0.5f; // Dash duration
-    [SerializeField] private float dashCooldown = 3.0f;  // Dash cooldown
+    [SerializeField] private float dashCooldown = 3.0f;
+    [SerializeField] private float dashDampLength = 2f;
+    private float dashDamp;
+    [SerializeField] private AnimationCurve dashDampCurve = AnimationCurve.Linear(0, 0, 1, 24f);// Dash cooldown
     
     [Header("Audio")]
     
@@ -54,8 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
     bool canDie = true;
     //bool isDashing = false;
-
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -74,8 +82,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
 
@@ -87,6 +95,17 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         characterController.Move(velocity * Time.deltaTime);
+
+        if (move != Vector3.zero)
+        {
+            previousDirection = move;
+            damp = dampLength;
+        }
+        if (move == Vector3.zero && damp > 0)
+        {
+            characterController.Move(previousDirection.normalized * (dampCurve.Evaluate(damp) * Time.deltaTime));
+            damp -= Time.deltaTime;
+        }
         
 
 
@@ -171,12 +190,20 @@ public class PlayerMovement : MonoBehaviour
     {
         //isDashing = true;
 
-        float dashTimer = dashTime;
+        float dashTimer = dashTime + dashDampLength;
         while (dashTimer > 0f)
         {
-            // Move the player in the dash direction
-            characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+            if(dashTimer > dashDampLength)
+            {
+                // Move the player in the dash direction
+                characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+            }
 
+            if (dashTimer <= dashDampLength)
+            {
+                characterController.Move(transform.forward * (dashDampCurve.Evaluate(dashTimer / dashDampLength) * Time.deltaTime));
+            }
+            
             // Update timer
             dashTimer -= Time.deltaTime;
 

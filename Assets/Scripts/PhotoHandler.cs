@@ -59,7 +59,7 @@ private Sprite snapshotSprite;
         {
             PhotoSound();
             StartCoroutine(PhotoLight());
-            Invoke("InvokeReadPixels", 0.2f);
+            Invoke("InvokeReadPixels", 0.05f);
         }
     }
 
@@ -90,7 +90,7 @@ private Sprite snapshotSprite;
     IEnumerator PhotoLight()
     {
         photoLight.enabled = true;
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSeconds(0.1f);
         photoLight.enabled = false;
     }
 
