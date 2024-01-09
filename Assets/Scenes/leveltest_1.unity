@@ -51127,7 +51127,7 @@ Transform:
   m_GameObject: {fileID: 1032363717}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.28997, y: -56.88688, z: 1.3480355}
+  m_LocalPosition: {x: 42.28997, y: -56.88688, z: -32.651966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -54817,7 +54817,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 0
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -58395,12 +58395,12 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 60.007, y: -2.0370002, z: -9.986}
-  - {x: 58.33853, y: -7.7308683, z: -12.122753}
-  - {x: 56.714436, y: -13.336924, z: -14.29167}
-  - {x: 55.1703, y: -18.784746, z: -16.518543}
-  - {x: 53.725872, y: -24.035257, z: -18.817686}
-  - {x: 52.381153, y: -29.088453, z: -21.189098}
-  - {x: 51.116386, y: -33.983418, z: -23.618467}
+  - {x: 58.875614, y: -7.675289, z: -12.587099}
+  - {x: 57.682224, y: -13.2367735, z: -15.128392}
+  - {x: 56.377113, y: -18.65986, z: -17.561918}
+  - {x: 54.932686, y: -23.910372, z: -19.861061}
+  - {x: 53.34894, y: -28.988302, z: -22.02582}
+  - {x: 51.65347, y: -33.927837, z: -24.082813}
   - {x: 49.896, y: -38.790565, z: -26.08}
   m_Parameters:
     serializedVersion: 3
@@ -66117,7 +66117,7 @@ Transform:
   m_GameObject: {fileID: 1639578784}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.04, y: 60.56, z: -22}
+  m_LocalPosition: {x: -25, y: 60, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

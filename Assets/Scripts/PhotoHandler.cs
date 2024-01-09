@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -43,15 +44,28 @@ private Sprite snapshotSprite;
 
     [SerializeField] private RenderTexture renderTexture;
     [SerializeField] private AudioSource photoAudio;
+    [SerializeField] private AudioClip[] photoClips;
     [SerializeField] private Light photoLight;
+
+    private void Start()
+    {
+        photoLight.enabled = false;
+    }
 
     void Update()
     {
         // Example: Call ReadPixels when a specific key is pressed (e.g., space bar)
         if (Input.GetKeyDown(KeyCode.P))
         {
-            ReadPixelsFromRenderTexture(renderTexture);
+            PhotoSound();
+            StartCoroutine(PhotoLight());
+            Invoke("InvokeReadPixels", 0.2f);
         }
+    }
+
+    void InvokeReadPixels()
+    {
+        ReadPixelsFromRenderTexture(renderTexture);
     }
 
     void ReadPixelsFromRenderTexture(RenderTexture rt)
@@ -68,16 +82,22 @@ private Sprite snapshotSprite;
         
         snapshotSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100f);
         targetPhoto.GetComponent<SpriteRenderer>().sprite = snapshotSprite;
-        
-        
 
         // Reset the active render texture
         RenderTexture.active = null;
     }
 
-    void PhotoEffects()
+    IEnumerator PhotoLight()
     {
-        
+        photoLight.enabled = true;
+        yield return new WaitForSeconds(0.33f);
+        photoLight.enabled = false;
+    }
+
+    void PhotoSound()
+    {
+        AudioClip clip = photoClips[UnityEngine.Random.Range(0, photoClips.Length)];
+        photoAudio.PlayOneShot(clip);
     }
 }
 
