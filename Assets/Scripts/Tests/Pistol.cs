@@ -8,19 +8,22 @@ public class Pistol : BaseWeapon
 {
     [SerializeField] private ParticleSystem hitParticlePrefab;
     [SerializeField] private ParticleSystem hitParticleEnemyPrefab;
+    [SerializeField] private ParticleSystem bulletParticle;
+    
+    
     [SerializeField] private Light gunfireLight;
     
     
     public override void BulletEmit(Vector3 hitPoint)
     {
-        // Instantiate the particle effect prefab at the hit position
-        ParticleSystem hitParticle = Instantiate(hitParticlePrefab, hitPoint, Quaternion.identity);
+        // Get the direction from the shooting point to the hit point
+        Vector3 direction = (hitPoint - bulletParticle.transform.position).normalized;
+
+        // Set the rotation of the particle system towards the hit point
+        bulletParticle.transform.rotation = Quaternion.LookRotation(direction);
 
         // Play the particle effect
-        hitParticle.Emit(1);
-
-        // Destroy the particle effect after its duration (adjust as needed)
-        Destroy(hitParticle.gameObject, hitParticle.main.duration);
+        bulletParticle.Emit(1);
     }
 
     public override void SpawnHitParticleEnemy(Vector3 hitPoint)

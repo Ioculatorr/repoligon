@@ -58678,12 +58678,12 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 60.007, y: -2.0370002, z: -9.986}
-  - {x: 58.375042, y: -7.739761, z: -12.125382}
-  - {x: 56.780224, y: -13.352947, z: -14.296408}
-  - {x: 55.252335, y: -18.804728, z: -16.52445}
-  - {x: 53.807907, y: -24.055239, z: -18.823593}
-  - {x: 52.44694, y: -29.104477, z: -21.193836}
-  - {x: 51.152897, y: -33.99231, z: -23.621098}
+  - {x: 58.87867, y: -7.6716204, z: -12.597396}
+  - {x: 57.68773, y: -13.230163, z: -15.146946}
+  - {x: 56.383976, y: -18.651617, z: -17.585054}
+  - {x: 54.93955, y: -23.902128, z: -19.884197}
+  - {x: 53.354446, y: -28.981691, z: -22.044374}
+  - {x: 51.656525, y: -33.924168, z: -24.09311}
   - {x: 49.896, y: -38.790565, z: -26.08}
   m_Parameters:
     serializedVersion: 3
@@ -66236,6 +66236,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 624558301}
+  - {fileID: 1862243583}
   m_Father: {fileID: 2115138186}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1627492153
@@ -66259,6 +66260,7 @@ MonoBehaviour:
       m_Calls: []
   hitParticlePrefab: {fileID: 1841878081}
   hitParticleEnemyPrefab: {fileID: 1952444959}
+  bulletParticle: {fileID: 1862243581}
   gunfireLight: {fileID: 624558303}
 --- !u!82 &1627492154
 AudioSource:
@@ -87274,11 +87276,11 @@ Transform:
   m_GameObject: {fileID: 1862243580}
   serializedVersion: 2
   m_LocalRotation: {x: -0.013088461, y: -0.013088461, z: -0.00017133716, w: 0.9998287}
-  m_LocalPosition: {x: 0, y: 0, z: 0.6000004}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5999985}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.100000024}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2115138186}
+  m_Father: {fileID: 1627492152}
   m_LocalEulerAnglesHint: {x: -1.5, y: -1.5, z: 0}
 --- !u!1 &1862575325
 GameObject:
@@ -95697,7 +95699,6 @@ Transform:
   m_Children:
   - {fileID: 1976889216}
   - {fileID: 969720312}
-  - {fileID: 1862243583}
   - {fileID: 1670694296}
   - {fileID: 92941643}
   - {fileID: 1921784037}
