@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,16 +11,18 @@ public abstract class BaseWeapon : MonoBehaviour
 {
     [SerializeField] internal AudioSource weaponAudio;
     public WeaponData weaponData;
-    private Transform shootingPointRaycast;
+    [SerializeField] private Transform shootingPointRaycast;
+    
     [SerializeField] private Transform cameraShake;
 
-    private float currentFireRate;
+    private float currentFireCooldown;
 
     public virtual void Awake()
     {
         weaponAudio = GetComponent<AudioSource>();
         gameObject.layer = 12;
 
+        SpawnModel();
     }
 
     public Transform ShootingPointRaycast
@@ -36,13 +39,16 @@ public abstract class BaseWeapon : MonoBehaviour
 
     public virtual void Shoot()
     {
+        if (!CanShoot())
+            return;
+        
         Ray ray = new Ray(shootingPointRaycast.position, shootingPointRaycast.forward);
         
         if (Physics.Raycast(ray, out RaycastHit hit, weaponData.maxDistance))
         {
             // Access the hit point
             Vector3 hitPoint = hit.point;
-            currentFireRate = weaponData.fireRate;
+            currentFireCooldown = weaponData.fireRate;
 
             BulletEmit(hitPoint);
 
@@ -66,7 +72,6 @@ public abstract class BaseWeapon : MonoBehaviour
             }
 
             onShoot.Invoke();
-            PlayPrefabEffects();
         }
         else
         {
@@ -75,22 +80,30 @@ public abstract class BaseWeapon : MonoBehaviour
 
             // Invoke the shoot trigger event
             onShoot.Invoke();
-            PlayPrefabEffects();
         }
-
+        
+        PlayPrefabEffects();
+        
         // Visualize the ray in the Scene view (for debugging purposes)
         Debug.DrawRay(ray.origin, ray.direction * weaponData.maxDistance, Color.red, 0.1f);
+        
+        currentFireCooldown = 1f / weaponData.fireRate;
     }
 
     private void Update()
     {
-        if (currentFireRate > 0)
-            currentFireRate -= Time.deltaTime;
+        if (currentFireCooldown > 0)
+            currentFireCooldown -= Time.deltaTime;
+    }
+
+    public virtual void SpawnModel()
+    {
+        Instantiate(weaponData.weaponPrefab, this.transform.position, Quaternion.identity);
     }
 
     public virtual bool CanShoot()
     {
-        return currentFireRate <= 0;
+        return currentFireCooldown <= 0;
     }
     
     internal void ShootShake()

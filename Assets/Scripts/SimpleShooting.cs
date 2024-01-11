@@ -8,7 +8,7 @@ public enum WeaponType
 {
     Pistol = 0,
     Camera = 1,
-    Lamp = 3
+    Lamp = 2
 }
 public class SimpleShooting : MonoBehaviour
 {    
@@ -22,7 +22,7 @@ public class SimpleShooting : MonoBehaviour
     [SerializeField] private WeaponData scriptableObjectB;
 
     private WeaponData currentScriptableObject;
-    private BaseWeapon currentBaseWeapon;
+    [SerializeField] private BaseWeapon currentBaseWeapon;
     private GameObject spawnedPrefab;
 
     private Tween gunShakeTween;
@@ -42,7 +42,8 @@ public class SimpleShooting : MonoBehaviour
     void Start()
     {
         // Initialize with the first ScriptableObject
-        SetScriptableObject(scriptableObjectA);
+        //SetScriptableObject(scriptableObjectA);
+        
     }
 
     void Update()
@@ -71,7 +72,7 @@ public class SimpleShooting : MonoBehaviour
     
     void ToggleScriptableObject()
     {
-        Destroy(currentBaseWeapon);
+        //Destroy(currentBaseWeapon.gameObject);
 
         // Switch between ScriptableObjects
         if (currentScriptableObject == scriptableObjectA)
@@ -87,10 +88,10 @@ public class SimpleShooting : MonoBehaviour
     void SetScriptableObject(WeaponData newScriptableObject)
     {
         // Set the current ScriptableObject and spawn its associated prefab
-        currentScriptableObject = newScriptableObject;
-        
+        //currentScriptableObject = newScriptableObject;
+
         //TODO ZMIEN WEAPONDATA NA ENUM / PREFAB 
-        
+
     }
     
 

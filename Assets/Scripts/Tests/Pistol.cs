@@ -43,11 +43,11 @@ public class Pistol : BaseWeapon
         weaponAudio.Play();
 
         //spawnedPrefab.GetComponentInChildren<AudioSource>().Play();
-        this.GetComponentInChildren<ParticleSystem>().Emit(1);
-        this.GetComponentInChildren<Light>().intensity = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
-        this.GetComponentInChildren<Light>().range = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
+        //this.GetComponentInChildren<ParticleSystem>().Emit(1);
+        //this.GetComponentInChildren<Light>().intensity = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
+        //this.GetComponentInChildren<Light>().range = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
 
-        Invoke("DisableLight", 0.05f);
+        //Invoke("DisableLight", 0.05f);
 
         ShootShake();
         ShootShakeGun();
