@@ -40,6 +40,14 @@ public class Pistol : BaseWeapon
 
     public override void SpawnHitParticle(Vector3 hitPoint)
     {
+        // Instantiate the particle effect prefab at the hit position
+        ParticleSystem hitParticle = Instantiate(hitParticlePrefab, hitPoint, Quaternion.identity);
+
+        // Play the particle effect
+        hitParticle.Emit(1);
+
+        // Destroy the particle effect after its duration (adjust as needed)
+        Destroy(hitParticle.gameObject, hitParticle.main.duration);
     }
 
     public override void PlayPrefabEffects()
