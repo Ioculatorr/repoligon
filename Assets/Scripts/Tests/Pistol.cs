@@ -8,6 +8,8 @@ public class Pistol : BaseWeapon
 {
     [SerializeField] private ParticleSystem hitParticlePrefab;
     [SerializeField] private ParticleSystem hitParticleEnemyPrefab;
+    [SerializeField] private Light gunfireLight;
+    
     
     public override void BulletEmit(Vector3 hitPoint)
     {
@@ -44,12 +46,21 @@ public class Pistol : BaseWeapon
 
         //spawnedPrefab.GetComponentInChildren<AudioSource>().Play();
         //this.GetComponentInChildren<ParticleSystem>().Emit(1);
-        //this.GetComponentInChildren<Light>().intensity = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
-        //this.GetComponentInChildren<Light>().range = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
 
-        //Invoke("DisableLight", 0.05f);
-
+        StartCoroutine(GunfireFlash());
+        
+        
         ShootShake();
         ShootShakeGun();
+    }
+    
+
+    IEnumerator GunfireFlash()
+    {
+        gunfireLight.intensity = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
+        gunfireLight.range = Mathf.RoundToInt(UnityEngine.Random.Range(2.5f, 5f));
+        
+        yield return new WaitForSeconds((0.05f));
+        gunfireLight.intensity = 0f;
     }
 }

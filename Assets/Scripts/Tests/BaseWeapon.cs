@@ -14,6 +14,7 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] private Transform shootingPointRaycast;
     
     [SerializeField] private Transform cameraShake;
+    private GameObject spawnedPrefab;
 
     private float currentFireCooldown;
 
@@ -99,7 +100,6 @@ public abstract class BaseWeapon : MonoBehaviour
     public virtual void SpawnModel()
     {
         spawnedPrefab = Instantiate(weaponData.weaponPrefab, transform.position, transform.rotation);
-
 
         spawnedPrefab.transform.parent = transform;
     }
