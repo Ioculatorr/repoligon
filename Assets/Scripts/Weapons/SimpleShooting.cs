@@ -37,13 +37,23 @@ public class SimpleShooting : MonoBehaviour
     public static Action OnHitEnemy;
 
     private bool PickedUpSmth = false;
+    
+    public BaseWeapon[] weaponDataArray;  // Array to hold different weapon data
+    private int currentWeaponIndex = 0;      // Index to track the current weapon
+    private BaseWeapon currentWeaponData; // Reference to the current weapon data
 
 
     void Start()
     {
-        // Initialize with the first ScriptableObject
-        //SetScriptableObject(scriptableObjectA);
-        
+        if (weaponDataArray.Length > 0)
+        {
+            // Set the initial weapon data
+            SwitchWeapon(0);
+        }
+        else
+        {
+            Debug.LogError("No weapon data assigned!");
+        }
     }
 
     void Update()
@@ -57,7 +67,7 @@ public class SimpleShooting : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q)&& !PickedUpSmth)
         {
             // Toggle between the two ScriptableObjects
-            ToggleScriptableObject();
+            //ToggleScriptableObject();
         }
         if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth && !AimAtYourself)
         {
@@ -68,20 +78,38 @@ public class SimpleShooting : MonoBehaviour
         {
             LifeChangeMind();
         }
+        ToggleScriptableObject();
     }
     
     void ToggleScriptableObject()
     {
-        //Destroy(currentBaseWeapon.gameObject);
-
-        // Switch between ScriptableObjects
-        if (currentScriptableObject == scriptableObjectA)
+        // Example: Switching between weapons (you can customize the logic)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SetScriptableObject(scriptableObjectB);
+            SwitchWeapon(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SwitchWeapon(1);
+        }
+        // Add more conditions for switching to other weapons
+    }
+
+    private void SwitchWeapon(int newIndex)
+    {
+        if (newIndex >= 0 && newIndex < weaponDataArray.Length)
+        {
+            // Update the current weapon index
+            currentWeaponIndex = newIndex;
+
+            // Assign the new weapon data
+            currentBaseWeapon = weaponDataArray[currentWeaponIndex];
+
+            Debug.Log("Switched to weapon: " + currentBaseWeapon);
         }
         else
         {
-            SetScriptableObject(scriptableObjectA);
+            Debug.LogError("Invalid weapon index: " + newIndex);
         }
     }
 
