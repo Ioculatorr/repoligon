@@ -98,7 +98,10 @@ public abstract class BaseWeapon : MonoBehaviour
 
     public virtual void SpawnModel()
     {
-        Instantiate(weaponData.weaponPrefab, this.transform.position, Quaternion.identity);
+        spawnedPrefab = Instantiate(weaponData.weaponPrefab, transform.position, transform.rotation);
+
+
+        spawnedPrefab.transform.parent = transform;
     }
 
     public virtual bool CanShoot()
