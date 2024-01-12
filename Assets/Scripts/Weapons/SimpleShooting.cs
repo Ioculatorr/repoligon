@@ -41,6 +41,8 @@ public class SimpleShooting : MonoBehaviour
     public BaseWeapon[] weaponDataArray;  // Array to hold different weapon data
     private int currentWeaponIndex = 0;      // Index to track the current weapon
     private BaseWeapon currentWeaponData; // Reference to the current weapon dat
+    
+    
 
 
     void Start()

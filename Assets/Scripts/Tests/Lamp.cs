@@ -45,6 +45,15 @@ public class Lamp : BaseWeapon
         weaponAudio.Play();
     }
     
+    public override void DestroyModel()
+    {
+        lampLight.enabled = false;
+        isLightOn = false;
+        
+        // Access spawnedPrefab from the BaseWeapon class
+        base.DestroyModel();
+    }
+    
     public override void BulletEmit(Vector3 hitPoint)
     {
     }
