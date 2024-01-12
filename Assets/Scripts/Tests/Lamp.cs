@@ -54,13 +54,15 @@ public class Lamp : BaseWeapon
         base.DestroyModel();
     }
     
+    
+    public override void LifeRestart()
+    {}
+    public override void LifeChangeMind()
+    {}
     public override void BulletEmit(Vector3 hitPoint)
-    {
-    }
+    {}
     public override void SpawnHitParticleEnemy(Vector3 hitPoint)
-    {
-    }
+    {}
     public override void SpawnHitParticle(Vector3 hitPoint)
-    {
-    }
+    {}
 }

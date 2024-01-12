@@ -58796,12 +58796,12 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 60.007, y: -2.0370002, z: -9.986}
-  - {x: 58.768394, y: -7.7476006, z: -12.354603}
-  - {x: 57.48902, y: -13.367073, z: -14.709449}
-  - {x: 56.136196, y: -18.822342, z: -17.039503}
-  - {x: 54.69177, y: -24.072853, z: -19.338646}
-  - {x: 53.15574, y: -29.118603, z: -21.606876}
-  - {x: 51.54625, y: -34.00015, z: -23.850317}
+  - {x: 58.66447, y: -7.7691646, z: -12.2400675}
+  - {x: 57.301758, y: -13.405931, z: -14.503062}
+  - {x: 55.90268, y: -18.870796, z: -16.782145}
+  - {x: 54.458252, y: -24.121307, z: -19.081287}
+  - {x: 52.968475, y: -29.157461, z: -21.400492}
+  - {x: 51.442326, y: -34.021713, z: -23.73578}
   - {x: 49.896, y: -38.790565, z: -26.08}
   m_Parameters:
     serializedVersion: 3
@@ -66373,9 +66373,26 @@ MonoBehaviour:
   shootingPointRaycast: {fileID: 1654323542}
   cameraShake: {fileID: 1161675074}
   weaponAudio: {fileID: 1627492154}
+  suicideSound: {fileID: 8300000, guid: 634bcbbd2175cdb43b128542cd551361, type: 3}
   onShoot:
     m_PersistentCalls:
       m_Calls: []
+  KilledYourself:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 455303894}
+        m_TargetAssemblyTypeName: DeathEffects, Assembly-CSharp
+        m_MethodName: deathEffects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AimAtYourself: 0
   hitParticlePrefab: {fileID: 1841878081}
   hitParticleEnemyPrefab: {fileID: 1952444959}
   bulletParticle: {fileID: 1862243581}
@@ -72533,9 +72550,14 @@ MonoBehaviour:
   shootingPointRaycast: {fileID: 0}
   cameraShake: {fileID: 0}
   weaponAudio: {fileID: 1742580134}
+  suicideSound: {fileID: 0}
   onShoot:
     m_PersistentCalls:
       m_Calls: []
+  KilledYourself:
+    m_PersistentCalls:
+      m_Calls: []
+  AimAtYourself: 0
   lampLight: {fileID: 1178075925}
 --- !u!82 &1742580134
 AudioSource:
@@ -94588,7 +94610,7 @@ MonoBehaviour:
   jumpHeight: 5
   jumpCooldown: 1
   dashSpeed: 24
-  dashTime: 0.5
+  dashTime: 0.1
   dashCooldown: 3
   dashDampLength: 1
   dashDampCurve:
@@ -95993,22 +96015,6 @@ MonoBehaviour:
   onShoot:
     m_PersistentCalls:
       m_Calls: []
-  KilledYourself:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 455303894}
-        m_TargetAssemblyTypeName: DeathEffects, Assembly-CSharp
-        m_MethodName: deathEffects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  suicideSound: {fileID: 8300000, guid: 634bcbbd2175cdb43b128542cd551361, type: 3}
   weaponDataArray:
   - {fileID: 1627492153}
   - {fileID: 1742580133}

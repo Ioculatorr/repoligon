@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework.Internal;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pistol : BaseWeapon
 {
@@ -12,8 +13,8 @@ public class Pistol : BaseWeapon
     
     
     [SerializeField] private Light gunfireLight;
-    
-    
+
+
     public override void BulletEmit(Vector3 hitPoint)
     {
         // Get the direction from the shooting point to the hit point

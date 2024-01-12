@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Dashing")]
 
     [SerializeField] private float dashSpeed = 24f;
-    [SerializeField] private float dashTime = 0.5f; // Dash duration
+    [SerializeField] private float dashTime = 0.1f; // Dash duration
     [SerializeField] private float dashCooldown = 3.0f;
     [SerializeField] private float dashDampLength = 2f;
     private float dashDamp;

@@ -16,11 +16,14 @@ public abstract class BaseWeapon : MonoBehaviour
     [SerializeField] private Transform shootingPointRaycast;
     [SerializeField] private Transform cameraShake;
     [SerializeField] internal AudioSource weaponAudio;
+    [SerializeField] private AudioClip suicideSound;
     
     [SerializeField] private UnityEvent onShoot;
+    [SerializeField] private UnityEvent KilledYourself;
     
     
     private GameObject spawnedPrefab;
+    public bool AimAtYourself = false;
 
     private float currentFireCooldown;
 
@@ -46,7 +49,12 @@ public abstract class BaseWeapon : MonoBehaviour
     {
         if (!CanShoot())
             return;
-        
+        if (AimAtYourself)
+        {
+            KilledYourself.Invoke();
+            Destroy(this);
+        }
+
         Ray ray = new Ray(shootingPointRaycast.position, shootingPointRaycast.forward);
         
         if (Physics.Raycast(ray, out RaycastHit hit, weaponData.maxDistance))
@@ -127,11 +135,6 @@ public abstract class BaseWeapon : MonoBehaviour
             });
     }
 
-    private void DisableLight()
-    {
-        GetComponentInChildren<Light>().intensity = 0f;
-    }
-
     internal void ShootShakeGun()
     {
         transform.DOPunchRotation(new Vector3(-15f, 0, 0), 0.5f, 10, 0f)
@@ -142,6 +145,22 @@ public abstract class BaseWeapon : MonoBehaviour
     }
 
 
+    public virtual void LifeRestart()
+    {
+        AimAtYourself = true;
+        spawnedPrefab.AddComponent<AudioSource>().PlayOneShot(suicideSound);
+        Destroy(spawnedPrefab.GetComponent<AudioSource>(), suicideSound.length);
+        //TODO
+        spawnedPrefab.transform.DOLookAt(cameraShake.transform.position, 0.2f);
+    }
+    
+    public virtual void LifeChangeMind()
+    {
+        AimAtYourself = false;
+        spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.2f);
+    }
+    
+    
     public abstract void BulletEmit(Vector3 hitPoint);
     public abstract void SpawnHitParticleEnemy(Vector3 hitPoint);
     public abstract void SpawnHitParticle(Vector3 hitPoint);

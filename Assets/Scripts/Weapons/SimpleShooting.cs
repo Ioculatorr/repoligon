@@ -28,12 +28,7 @@ public class SimpleShooting : MonoBehaviour
     private Tween gunShakeTween;
     
     [SerializeField] private UnityEvent onShoot;
-    
-    
-    [SerializeField] private UnityEvent KilledYourself;
-    [SerializeField] private AudioClip suicideSound;
-    bool AimAtYourself = false;
-    
+
     public static Action OnHitEnemy;
 
     private bool PickedUpSmth = false;
@@ -73,14 +68,16 @@ public class SimpleShooting : MonoBehaviour
             // Toggle between the two ScriptableObjects
             //ToggleScriptableObject();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth && !AimAtYourself)
+        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth && !currentBaseWeapon.AimAtYourself)
         {
             // Kill yourself
-            LifeRestart();
+            //LifeRestart();
+            currentBaseWeapon.LifeRestart();
         }
-        else if (Input.GetKeyDown((KeyCode.R)) && !PickedUpSmth && AimAtYourself)
+        else if (Input.GetKeyDown((KeyCode.R)) && !PickedUpSmth && currentBaseWeapon.AimAtYourself)
         {
-            LifeChangeMind();
+            //LifeChangeMind();
+            currentBaseWeapon.LifeChangeMind();
         }
         ToggleScriptableObject();
     }
@@ -131,32 +128,21 @@ public class SimpleShooting : MonoBehaviour
         //TODO ZMIEN WEAPONDATA NA ENUM / PREFAB 
 
     }
-    
-
-    private void LifeRestart()
-    {
-        AimAtYourself = true;
-        this.AddComponent<AudioSource>().PlayOneShot(suicideSound);
-        Destroy(this.GetComponent<AudioSource>(), suicideSound.length);
-        //TODO
-        spawnedPrefab.transform.DOLookAt(cameraShake.transform.position, 0.2f);
-    }
-
-    private void LifeChangeMind()
-    {
-        AimAtYourself = false;
-        spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.2f);
-    }
 
     public void HideWeaponOnPickUp()
     {
         PickedUpSmth = true;
-        Destroy(currentBaseWeapon);
+        currentBaseWeapon.DestroyModel();
     }
     
     public void SpawnWeaponOnDropOff()
     {
         PickedUpSmth = false;
-        SetScriptableObject(scriptableObjectA);
+        
+        // Assign the new weapon data
+        currentBaseWeapon = weaponDataArray[currentWeaponIndex];
+            
+        // Spawn the model of the new weapon
+        currentBaseWeapon.SpawnModel();
     }
 }
