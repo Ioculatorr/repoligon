@@ -17,6 +17,9 @@ public class Lamp : BaseWeapon
             lampLight.enabled = true;
             isLightOn = true;
             canChangeLight = false;
+
+            PlayPrefabEffects();
+            
             StartCoroutine(LampWaitTime());
         }
         else if (isLightOn && canChangeLight)
@@ -24,6 +27,9 @@ public class Lamp : BaseWeapon
             lampLight.enabled = false;
             isLightOn = false;
             canChangeLight = false;
+
+            PlayPrefabEffects();
+            
             StartCoroutine(LampWaitTime());
         }
     }
@@ -34,29 +40,18 @@ public class Lamp : BaseWeapon
         canChangeLight = true;
     }
 
-
-    void Update()
-    {
-        Debug.Log(canChangeLight);
-    }
-
-    public override void BulletEmit(Vector3 hitPoint)
-    {
-        
-    }
-
-    public override void SpawnHitParticleEnemy(Vector3 hitPoint)
-    {
-        
-    }
-
-    public override void SpawnHitParticle(Vector3 hitPoint)
-    {
-        
-    }
-
     public override void PlayPrefabEffects()
     {
-        
+        weaponAudio.Play();
+    }
+    
+    public override void BulletEmit(Vector3 hitPoint)
+    {
+    }
+    public override void SpawnHitParticleEnemy(Vector3 hitPoint)
+    {
+    }
+    public override void SpawnHitParticle(Vector3 hitPoint)
+    {
     }
 }

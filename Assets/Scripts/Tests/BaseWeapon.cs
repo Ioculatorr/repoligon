@@ -9,11 +9,17 @@ using UnityEngine.Events;
 [RequireComponent(typeof(AudioSource))]
 public abstract class BaseWeapon : MonoBehaviour
 {
-    [SerializeField] internal AudioSource weaponAudio;
     public WeaponData weaponData;
-    [SerializeField] private Transform shootingPointRaycast;
     
+    [Header("Components")]
+    
+    [SerializeField] private Transform shootingPointRaycast;
     [SerializeField] private Transform cameraShake;
+    [SerializeField] internal AudioSource weaponAudio;
+    
+    [SerializeField] private UnityEvent onShoot;
+    
+    
     private GameObject spawnedPrefab;
 
     private float currentFireCooldown;
@@ -23,7 +29,7 @@ public abstract class BaseWeapon : MonoBehaviour
         weaponAudio = GetComponent<AudioSource>();
         gameObject.layer = 12;
 
-        SpawnModel();
+        //SpawnModel();
     }
 
     public Transform ShootingPointRaycast
@@ -35,8 +41,6 @@ public abstract class BaseWeapon : MonoBehaviour
             shootingPointRaycast = value;
         }
     }
-
-    [SerializeField] private UnityEvent onShoot;
 
     public virtual void Shoot()
     {
@@ -102,6 +106,11 @@ public abstract class BaseWeapon : MonoBehaviour
         spawnedPrefab = Instantiate(weaponData.weaponPrefab, transform.position, transform.rotation);
 
         spawnedPrefab.transform.parent = transform;
+    }
+
+    public virtual void DestroyModel()
+    {
+        Destroy(spawnedPrefab);
     }
 
     public virtual bool CanShoot()

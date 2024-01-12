@@ -57652,13 +57652,13 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178075922}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 100
+  m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -58796,12 +58796,12 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 60.007, y: -2.0370002, z: -9.986}
-  - {x: 58.878643, y: -7.671653, z: -12.597305}
-  - {x: 57.68768, y: -13.230221, z: -15.146783}
-  - {x: 56.38392, y: -18.65169, z: -17.584852}
-  - {x: 54.93949, y: -23.9022, z: -19.883995}
-  - {x: 53.354397, y: -28.98175, z: -22.044212}
-  - {x: 51.656498, y: -33.924202, z: -24.09302}
+  - {x: 58.660522, y: -7.7694845, z: -12.236857}
+  - {x: 57.294643, y: -13.4065075, z: -14.497277}
+  - {x: 55.89381, y: -18.871515, z: -16.774931}
+  - {x: 54.449383, y: -24.122026, z: -19.074074}
+  - {x: 52.96136, y: -29.158037, z: -21.394707}
+  - {x: 51.438377, y: -34.022034, z: -23.73257}
   - {x: 49.896, y: -38.790565, z: -26.08}
   m_Parameters:
     serializedVersion: 3
@@ -66369,10 +66369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7e26f6c6fd39134e8f40c2ecaf7676a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponAudio: {fileID: 1627492154}
   weaponData: {fileID: 11400000, guid: d8c77116fc409e340b27354dda0a33aa, type: 2}
   shootingPointRaycast: {fileID: 1654323542}
   cameraShake: {fileID: 1161675074}
+  weaponAudio: {fileID: 1627492154}
   onShoot:
     m_PersistentCalls:
       m_Calls: []
@@ -72529,10 +72529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 261c0d8891c3a45408dd5dc3ec59285a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponAudio: {fileID: 0}
-  weaponData: {fileID: 0}
+  weaponData: {fileID: 11400000, guid: 5fd3e46a5440c5a4f8b957f31a0cd1c4, type: 2}
   shootingPointRaycast: {fileID: 0}
   cameraShake: {fileID: 0}
+  weaponAudio: {fileID: 1742580134}
   onShoot:
     m_PersistentCalls:
       m_Calls: []
@@ -72547,9 +72547,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 9895d731379e777448738242a5e9ba51, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.25
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -95989,7 +95989,7 @@ MonoBehaviour:
   cameraShake: {fileID: 1161675074}
   scriptableObjectA: {fileID: 11400000, guid: d8c77116fc409e340b27354dda0a33aa, type: 2}
   scriptableObjectB: {fileID: 11400000, guid: b034a5506a6c42540871906505405c97, type: 2}
-  currentBaseWeapon: {fileID: 0}
+  currentBaseWeapon: {fileID: 1627492153}
   onShoot:
     m_PersistentCalls:
       m_Calls: []

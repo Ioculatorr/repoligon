@@ -40,11 +40,13 @@ public class SimpleShooting : MonoBehaviour
     
     public BaseWeapon[] weaponDataArray;  // Array to hold different weapon data
     private int currentWeaponIndex = 0;      // Index to track the current weapon
-    private BaseWeapon currentWeaponData; // Reference to the current weapon data
+    private BaseWeapon currentWeaponData; // Reference to the current weapon dat
 
 
     void Start()
     {
+        currentBaseWeapon.SpawnModel();
+        
         if (weaponDataArray.Length > 0)
         {
             // Set the initial weapon data
@@ -99,11 +101,17 @@ public class SimpleShooting : MonoBehaviour
     {
         if (newIndex >= 0 && newIndex < weaponDataArray.Length)
         {
+            // Destroy the model of the current weapon
+            currentBaseWeapon.DestroyModel();
+            
             // Update the current weapon index
             currentWeaponIndex = newIndex;
 
             // Assign the new weapon data
             currentBaseWeapon = weaponDataArray[currentWeaponIndex];
+            
+            // Spawn the model of the new weapon
+            currentBaseWeapon.SpawnModel();
 
             Debug.Log("Switched to weapon: " + currentBaseWeapon);
         }
