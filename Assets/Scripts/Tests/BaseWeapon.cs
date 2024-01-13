@@ -169,8 +169,8 @@ public abstract class BaseWeapon : MonoBehaviour
         AimAtYourself = false;
         spawnedPrefab.transform.DOLocalRotateQuaternion(Quaternion.identity, 0.2f);
     }
-    
-    
+
+    public abstract void AltShoot();
     public abstract void BulletEmit(Vector3 hitPoint);
     public abstract void SpawnHitParticleEnemy(Vector3 hitPoint);
     public abstract void SpawnHitParticle(Vector3 hitPoint);

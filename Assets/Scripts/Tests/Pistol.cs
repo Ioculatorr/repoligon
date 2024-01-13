@@ -75,4 +75,7 @@ public class Pistol : BaseWeapon
         yield return new WaitForSeconds((0.05f));
         gunfireLight.intensity = 0f;
     }
+    
+    public override void AltShoot()
+    {}
 }

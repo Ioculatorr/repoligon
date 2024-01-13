@@ -50,6 +50,10 @@ public class SimpleShooting : MonoBehaviour
         {
             currentBaseWeapon.Shoot();
         }
+        if (Input.GetKeyDown(KeyCode.Mouse1) && !PickedUpSmth)
+        {
+            currentBaseWeapon.AltShoot();
+        }
         // Check for input or any condition to switch between ScriptableObjects
         if (Input.GetKeyDown(KeyCode.Q)&& !PickedUpSmth)
         {

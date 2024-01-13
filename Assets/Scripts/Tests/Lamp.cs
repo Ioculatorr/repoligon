@@ -53,8 +53,9 @@ public class Lamp : BaseWeapon
         // Access spawnedPrefab from the BaseWeapon class
         base.DestroyModel();
     }
-    
-    
+
+    public override void AltShoot()
+    {}
     public override void LifeRestart()
     {}
     public override void LifeChangeMind()

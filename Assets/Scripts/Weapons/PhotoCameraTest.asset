@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c817e7299088f2d4faab65a54d8ddafc, type: 3}
   m_Name: PhotoCameraTest
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 3758635948940183148, guid: 29631f31240a9b34fb34250c5f52fd25,
+  weaponPrefab: {fileID: 2023110896354160082, guid: 366a8bb5c30ece04ab0af39a892ca1d7,
     type: 3}
   audio: {fileID: 0}
+  PrefabPhoto: {fileID: 6106084681027668330, guid: 0b0491c983bfbce4da0466e84f99d138,
+    type: 3}
   fireRate: 1
   maxDistance: 0
