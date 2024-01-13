@@ -11,6 +11,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RadioSignalChange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tests/BaseWeapon.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tests/Pistol.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tests/ToolPhotoCamera.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TweenCombiner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/SimpleShooting.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -107,7 +109,8 @@
       <workItem from="1704798858772" duration="2408000" />
       <workItem from="1704971297145" duration="224000" />
       <workItem from="1705012760626" duration="7361000" />
-      <workItem from="1705045098477" duration="3646000" />
+      <workItem from="1705045098477" duration="4142000" />
+      <workItem from="1705102491659" duration="5717000" />
     </task>
     <servers />
   </component>

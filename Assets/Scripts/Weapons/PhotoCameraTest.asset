@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c817e7299088f2d4faab65a54d8ddafc, type: 3}
-  m_Name: PhotoTest
+  m_Name: PhotoCameraTest
   m_EditorClassIdentifier: 
-  weaponPrefab: {fileID: 2023110896354160082, guid: 366a8bb5c30ece04ab0af39a892ca1d7,
+  weaponPrefab: {fileID: 3758635948940183148, guid: 29631f31240a9b34fb34250c5f52fd25,
     type: 3}
   audio: {fileID: 0}
-  fireRate: 0
+  fireRate: 1
   maxDistance: 0

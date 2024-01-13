@@ -3,24 +3,41 @@ using UnityEngine;
 
 public class StandOnPlatform : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-        other.AddComponent<Rigidbody>();
-        other.GetComponent<Rigidbody>().freezeRotation = true;
-        other.GetComponent<Rigidbody>().isKinematic = true;
+    [SerializeField] private GameObject player;
 
-        // Set the other as a child of the platform
-        other.transform.parent = transform;
-        Debug.Log("I am in");
+
+    private void OnTriggerEnter(Collider otherCollider)
+    {
+        // Check if the collider entering the trigger is the player
+        if (otherCollider.gameObject == player)
+        {
+            Rigidbody playerRigidbody = player.GetComponent<Rigidbody>();
+
+            // Check if the player already has a Rigidbody
+            if (playerRigidbody == null)
+            {
+                player.AddComponent<Rigidbody>();
+                playerRigidbody = player.GetComponent<Rigidbody>();
+                playerRigidbody.freezeRotation = true;
+                playerRigidbody.isKinematic = true;
+            }
+
+            // Set the player as a child of the platform
+            player.transform.parent = transform;
+            Debug.Log("Player entered the trigger");
+        }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider otherCollider)
     {
-        Destroy(other.GetComponent<Rigidbody>());
+        if (otherCollider.gameObject == player)
+        {
+            Destroy(player.GetComponent<Rigidbody>());
 
-        // Remove the other as a child of the platform
-        other.transform.parent = null;
+            // Remove the other as a child of the platform
+            player.transform.parent = null;
 
-        Debug.Log("I am out");
+            Debug.Log("I am out");
+        }
     }
 }

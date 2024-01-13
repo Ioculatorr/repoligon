@@ -12,32 +12,20 @@ public enum WeaponType
 }
 public class SimpleShooting : MonoBehaviour
 {    
-    
     [SerializeField] private Transform cameraShake;
-
-
+    
     [Header("Weapons")]
-
-    [SerializeField] private WeaponData scriptableObjectA;
-    [SerializeField] private WeaponData scriptableObjectB;
-
-    private WeaponData currentScriptableObject;
+    
     [SerializeField] private BaseWeapon currentBaseWeapon;
+    public BaseWeapon[] weaponDataArray;  // Array to hold different weapon data
+    private int currentWeaponIndex = 0; // Index to track the current weapon
+    
+    private bool PickedUpSmth = false;
     private GameObject spawnedPrefab;
-
     private Tween gunShakeTween;
     
     [SerializeField] private UnityEvent onShoot;
 
-    public static Action OnHitEnemy;
-
-    private bool PickedUpSmth = false;
-    
-    public BaseWeapon[] weaponDataArray;  // Array to hold different weapon data
-    private int currentWeaponIndex = 0;      // Index to track the current weapon
-    private BaseWeapon currentWeaponData; // Reference to the current weapon dat
-    
-    
 
 
     void Start()
@@ -89,9 +77,13 @@ public class SimpleShooting : MonoBehaviour
         {
             SwitchWeapon(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             SwitchWeapon(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SwitchWeapon(2);
         }
         // Add more conditions for switching to other weapons
     }
