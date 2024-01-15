@@ -2243,7 +2243,7 @@ Transform:
   m_GameObject: {fileID: 3726554}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16, y: 2, z: -45}
+  m_LocalPosition: {x: 13, y: 2, z: -11.379999}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -40597,7 +40597,7 @@ GameObject:
   - component: {fileID: 885360901}
   - component: {fileID: 885360903}
   m_Layer: 0
-  m_Name: Box Volume
+  m_Name: RadioMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59017,12 +59017,12 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 60.007, y: -2.0370002, z: -9.986}
-  - {x: 58.522423, y: -7.765783, z: -12.158547}
-  - {x: 57.04579, y: -13.3998375, z: -14.356168}
-  - {x: 55.583492, y: -18.863197, z: -16.59897}
-  - {x: 54.139065, y: -24.113708, z: -18.898113}
-  - {x: 52.71251, y: -29.151367, z: -21.253597}
-  - {x: 51.300278, y: -34.01833, z: -23.65426}
+  - {x: 58.77393, y: -7.745535, z: -12.362796}
+  - {x: 57.49899, y: -13.363352, z: -14.724211}
+  - {x: 56.148624, y: -18.817701, z: -17.057913}
+  - {x: 54.704197, y: -24.068213, z: -19.357056}
+  - {x: 53.165707, y: -29.114882, z: -21.62164}
+  - {x: 51.551785, y: -33.99808, z: -23.85851}
   - {x: 49.896, y: -38.790565, z: -26.08}
   m_Parameters:
     serializedVersion: 3
@@ -59118,7 +59118,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 150}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1325747760
 MonoBehaviour:
@@ -59140,7 +59140,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click "T" to talk
+  m_text: Click "E" to talk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
   m_sharedMaterial: {fileID: 8365962216623914182, guid: c208a126c95432043949e5b97a716404,
@@ -59168,8 +59168,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -65828,17 +65828,17 @@ PrefabInstance:
     - target: {fileID: 5342582866034567404, guid: 366a8bb5c30ece04ab0af39a892ca1d7,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5342582866034567404, guid: 366a8bb5c30ece04ab0af39a892ca1d7,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5342582866034567404, guid: 366a8bb5c30ece04ab0af39a892ca1d7,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5501763394283942332, guid: 366a8bb5c30ece04ab0af39a892ca1d7,
         type: 3}
