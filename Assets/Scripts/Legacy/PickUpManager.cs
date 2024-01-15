@@ -7,7 +7,7 @@ public class PickUpManager : MonoBehaviour
     [Header("Pickup Settings")]
     [SerializeField] private Transform holdArea;
     [SerializeField] private GameObject heldObj;
-    private bool isSmthHeld = true;
+    //private bool isSmthHeld = true;
     [SerializeField] private Rigidbody heldObjRB;
     [SerializeField] private float throwAmount = 20.0f;
 
@@ -35,14 +35,14 @@ public class PickUpManager : MonoBehaviour
                 if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, pickupRange))
                 {
                     PickupObject(hit.transform.gameObject);
-                    isSmthHeld = true;
+                    //isSmthHeld = true;
                     
                 }
             }
             else
             {
                 DropObject();
-                isSmthHeld = false;
+                //isSmthHeld = false;
             }
         }
         if(heldObj != null)
@@ -51,7 +51,7 @@ public class PickUpManager : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 ThrowObject();
-                isSmthHeld = false;
+                //isSmthHeld = false;
             }
         }
 

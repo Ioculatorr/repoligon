@@ -8,7 +8,7 @@ public class DialogueNPC : MonoBehaviour
     private DialogueContainer dialogueToSent;
     private bool inTalkingRange = false;
     private bool alreadyTalking = false;
-    //private bool canTalk = true;
+    [SerializeField] private bool talkInstant = false;
     [SerializeField] private CanvasGroup npcClickTo;
 
     DialogueManager isDialogueActive;
@@ -27,12 +27,18 @@ public class DialogueNPC : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && inTalkingRange == true && alreadyTalking == false)
+        if (Input.GetKeyDown(KeyCode.E) && inTalkingRange == true && alreadyTalking == false && talkInstant == false)
         {
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
             dialogueManager.StartDialogueContainer(dialogueToSent);
             alreadyTalking = true;
             npcClickTo.DOFade(0f, 1f);
+        }
+        else if (inTalkingRange == true && alreadyTalking == false && talkInstant == true)
+        {
+            DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+            dialogueManager.StartDialogueContainer(dialogueToSent);
+            alreadyTalking = true;
         }
     }
 
