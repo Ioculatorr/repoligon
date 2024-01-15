@@ -44,7 +44,6 @@ public class FallEffects : MonoBehaviour
     private void Update()
     {
 
-
         //if (boolGrounded.isGrounded == false && canStartCoroutine == true)
         //{
         //    StartCoroutine(CameraFallShake());
@@ -57,7 +56,7 @@ public class FallEffects : MonoBehaviour
         //}
 
 
-        if (Mathf.Abs(characterController.velocity.y) > minFallingSpeed)
+        if (Mathf.Abs(characterController.velocity.y) >= minFallingSpeed)
         {
             float normalizedSpeed = Mathf.InverseLerp(minFallingSpeed, maxFallingSpeed, Mathf.Abs(characterController.velocity.y));
             intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);

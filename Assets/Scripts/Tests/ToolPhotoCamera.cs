@@ -65,6 +65,13 @@ public class ToolPhotoCamera : BaseWeapon
         {
             targetPhoto.transform.DOLocalMove(new Vector3(-0.5f, 0.5f, -0.35f), 1f);
         }
+        else
+        {
+            targetPhoto.transform.DOLocalMove(new Vector3(-0.5f, -0.5f, 0.35f), 1f);
+        }
+
+        canZoomPhoto = !canZoomPhoto;
+
     }
 
     IEnumerator PhotoLight()
