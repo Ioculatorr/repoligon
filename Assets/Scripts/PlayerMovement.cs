@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (move == Vector3.zero && damp > 0)
         {
-            characterController.Move(previousDirection.normalized * (dampCurve.Evaluate(damp) * Time.deltaTime));
+            characterController.Move(previousDirection.normalized * (dampCurve.Evaluate(damp) * Time.deltaTime) + Vector3.up * characterController.velocity.y * Time.deltaTime);
             damp -= Time.deltaTime;
         }
         
@@ -197,12 +197,13 @@ public class PlayerMovement : MonoBehaviour
             if(dashTimer > dashDampLength)
             {
                 // Move the player in the dash direction
-                characterController.Move(transform.forward * dashSpeed * Time.deltaTime);
+           
+                characterController.Move((dashSpeed * Time.deltaTime * transform.forward) + Vector3.up * characterController.velocity.y * Time.deltaTime);
             }
 
             if (dashTimer <= dashDampLength)
             {
-                characterController.Move(transform.forward * (dashDampCurve.Evaluate(dashTimer / dashDampLength) * Time.deltaTime));
+                characterController.Move(transform.forward * (dashDampCurve.Evaluate(dashTimer / dashDampLength) * Time.deltaTime) + Vector3.up * characterController.velocity.y * Time.deltaTime);
             }
             
             // Update timer

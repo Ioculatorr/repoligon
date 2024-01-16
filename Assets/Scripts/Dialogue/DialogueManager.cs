@@ -132,7 +132,7 @@ public class DialogueManager : MonoBehaviour
             if (currentChar != ' ' && currentDialogue.typingSound != null && currentDialogue.typingTalk == true && useSkip == false)
             {
                 audioSource.PlayOneShot(currentDialogue.typingSound); // Play typing sound
-                //currentDialogue.typingPitch = Random.Range(0.7f, 1.5f);
+                audioSource.pitch = Random.Range(0.9f, 1.2f);
             }
 
             if (currentDialogue.fontShake == true)
@@ -144,10 +144,12 @@ public class DialogueManager : MonoBehaviour
             float waitTime = useSkip ? instantAnimSpeed : currentDialogue.fontAnimSpeed;
 
             yield return new WaitForSeconds(waitTime);
-
+            
             //useSkip = false;
 
         }
+
+        audioSource.pitch = 1.0f;
 
         isAnimatingText = false;
     }
