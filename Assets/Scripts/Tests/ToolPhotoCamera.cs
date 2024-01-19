@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,12 @@ public class ToolPhotoCamera : BaseWeapon
     private bool canTakePhoto = true;
     private bool canZoomPhoto = false;
 
-    
+    private void Start()
+    {
+        canvasPhoto.enabled = false;
+    }
+
+
     public override void Shoot()
     {
         if (canTakePhoto)
@@ -40,7 +46,8 @@ public class ToolPhotoCamera : BaseWeapon
     
     void ReadPixelsFromRenderTexture(RenderTexture rt)
     {
-
+        canvasPhoto.enabled = true;
+        
         // Create a new Texture2D
         Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height);
         
@@ -108,7 +115,7 @@ public class ToolPhotoCamera : BaseWeapon
     
     public override void DestroyModel()
     {
-        rawPhoto.texture = null;
+        canvasPhoto.enabled = false;
         
         // Access spawnedPrefab from the BaseWeapon class
         base.DestroyModel();

@@ -6,6 +6,9 @@ using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField] private CharacterController playerMovement;
+    
+    
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI CharacterName;
     public Image dialogueImage;
@@ -97,6 +100,8 @@ public class DialogueManager : MonoBehaviour
         {
             StartCoroutine(AnimateText());
         }
+
+        playerMovement.enabled = false;
     }
 
     public void ShowNextLine()
@@ -165,6 +170,8 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
 
         isDialogueActive = false;
+
+        playerMovement.enabled = true;
 
     }
 

@@ -23,7 +23,7 @@ public class SimpleShooting : MonoBehaviour
     private bool PickedUpSmth = false;
     private GameObject spawnedPrefab;
     private Tween gunShakeTween;
-    
+
     [SerializeField] private UnityEvent onShoot;
 
 
