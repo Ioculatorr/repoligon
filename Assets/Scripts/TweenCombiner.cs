@@ -36,22 +36,4 @@ public class TweenCombiner : MonoBehaviour
         // Play the combined sequence
         combinedSequence.Play();
     }
-    
-    private void StartHeadBobbing()
-    {
-        // Start head bobbing when called
-        StartCoroutine(HeadBob());
-    }
-
-    private IEnumerator HeadBob()
-    {
-        while (true)
-        {
-            // Move the head up
-            yield return this.transform.DOShakePosition(1f, 0.1f, 1, 15);
-
-            // Move the head down
-            yield return this.transform.DOShakePosition(1f, 0.1f, 1, 15);
-        }
-    }
 }

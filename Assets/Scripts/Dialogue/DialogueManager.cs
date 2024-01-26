@@ -3,16 +3,18 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using System.Collections;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private CharacterController playerMovement;
     
     
-    public TextMeshProUGUI dialogueText;
-    public TextMeshProUGUI CharacterName;
-    public Image dialogueImage;
-    public CanvasGroup dialogueGroup;
+    [SerializeField] private TextMeshProUGUI dialogueText;
+    [SerializeField] private TextMeshProUGUI CharacterName;
+    [SerializeField] private Image dialogueImage;
+    [SerializeField] private CanvasGroup dialogueGroup;
+    [SerializeField] private CanvasGroup dialogueInteractGroup;
     //public float textAnimationSpeed = 0.05f;
 
     private int currentLine = 0;
@@ -26,16 +28,16 @@ public class DialogueManager : MonoBehaviour
     private float instantAnimSpeed = 0f;
     bool useSkip = false;
 
+    [SerializeField] private UnityEvent isTalking;
+    [SerializeField] private UnityEvent isNotTalking;
+
 
     private void Start()
     {
         dialogueText.text = "";
         dialogueGroup.alpha = 0f;
-
-        //foreach (var item in dialogueContainer.dialogues)
-        //{
-
-        //}
+        
+        dialogueInteractGroup.alpha = 0f;
     }
 
     private void Update()
@@ -49,6 +51,7 @@ public class DialogueManager : MonoBehaviour
             }
             else if (currentLine >= currentDialogue.dialogueLines.Length)
             {
+                dialogueInteractGroup.alpha = 0f;
                 // If the text animation is in progress and all lines are shown, end the dialogue
                 EndDialogue();
             }
@@ -90,6 +93,7 @@ public class DialogueManager : MonoBehaviour
 
         audioSource.pitch = currentDialogue.typingPitch;
 
+        isTalking.Invoke();
         dialogueGroup.DOFade(1f, 1f);
 
         isDialogueActive = true;
@@ -165,6 +169,8 @@ public class DialogueManager : MonoBehaviour
         isAnimatingText = false;
         currentLine = 0;
 
+        isNotTalking.Invoke();
+        HidePressInteract();
         dialogueGroup.DOFade(0f, 1f);
 
         StopAllCoroutines();
@@ -181,5 +187,15 @@ public class DialogueManager : MonoBehaviour
         {
             useSkip = true;
         }
+    }
+    
+    public void ShowPressInteract()
+    {
+        dialogueInteractGroup.DOFade(1f, 1f);
+    }
+    
+    public void HidePressInteract()
+    {
+        dialogueInteractGroup.DOFade(0f, 1f);
     }
 }

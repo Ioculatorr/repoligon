@@ -21,6 +21,7 @@ public class SimpleShooting : MonoBehaviour
     private int currentWeaponIndex = 0; // Index to track the current weapon
     
     private bool PickedUpSmth = false;
+    private bool isTalking = false;
     private GameObject spawnedPrefab;
     private Tween gunShakeTween;
 
@@ -46,7 +47,7 @@ public class SimpleShooting : MonoBehaviour
     void Update()
     {
         // Check for user input (e.g., space key) to trigger shooting
-        if (Input.GetKey(KeyCode.Mouse0) && !PickedUpSmth)
+        if (Input.GetKey(KeyCode.Mouse0) && !PickedUpSmth && !isTalking)
         {
             currentBaseWeapon.Shoot();
         }
@@ -55,18 +56,18 @@ public class SimpleShooting : MonoBehaviour
             currentBaseWeapon.AltShoot();
         }
         // Check for input or any condition to switch between ScriptableObjects
-        if (Input.GetKeyDown(KeyCode.Q)&& !PickedUpSmth)
+        if (Input.GetKeyDown(KeyCode.Q)&& !PickedUpSmth && !isTalking)
         {
             // Toggle between the two ScriptableObjects
             //ToggleScriptableObject();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth && !currentBaseWeapon.AimAtYourself)
+        if (Input.GetKeyDown(KeyCode.R) && !PickedUpSmth && !isTalking && !currentBaseWeapon.AimAtYourself)
         {
             // Kill yourself
             //LifeRestart();
             currentBaseWeapon.LifeRestart();
         }
-        else if (Input.GetKeyDown((KeyCode.R)) && !PickedUpSmth && currentBaseWeapon.AimAtYourself)
+        else if (Input.GetKeyDown((KeyCode.R)) && !PickedUpSmth && !isTalking && currentBaseWeapon.AimAtYourself)
         {
             //LifeChangeMind();
             currentBaseWeapon.LifeChangeMind();
@@ -130,10 +131,27 @@ public class SimpleShooting : MonoBehaviour
         PickedUpSmth = true;
         currentBaseWeapon.DestroyModel();
     }
-    
+
     public void SpawnWeaponOnDropOff()
     {
         PickedUpSmth = false;
+        
+        // Assign the new weapon data
+        currentBaseWeapon = weaponDataArray[currentWeaponIndex];
+            
+        // Spawn the model of the new weapon
+        currentBaseWeapon.SpawnModel();
+    }
+    
+    public void HideWeaponOnTalk()
+    {
+        isTalking = true;
+        currentBaseWeapon.DestroyModel();
+    }
+    
+    public void SpawnWeaponOnStopTalk()
+    {
+        isTalking = false;
         
         // Assign the new weapon data
         currentBaseWeapon = weaponDataArray[currentWeaponIndex];

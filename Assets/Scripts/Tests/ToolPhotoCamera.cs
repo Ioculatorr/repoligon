@@ -47,7 +47,9 @@ public class ToolPhotoCamera : BaseWeapon
     void ReadPixelsFromRenderTexture(RenderTexture rt)
     {
         canvasPhoto.enabled = true;
-        
+
+        rawPhoto.DOFade(0, 0f);
+
         // Create a new Texture2D
         Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height);
         
@@ -59,6 +61,8 @@ public class ToolPhotoCamera : BaseWeapon
 
         // Assign the captured frame to the RawImage
         rawPhoto.texture = texture2D;
+        
+        rawPhoto.DOFade(1f, 4f);
 
         PhotoPath();
     }

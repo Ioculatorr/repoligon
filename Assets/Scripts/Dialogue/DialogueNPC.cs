@@ -1,25 +1,27 @@
 using System;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
 
 public class DialogueNPC : MonoBehaviour
 {
     [SerializeField] private DialogueContainer initialDialogue;
     [SerializeField] private DialogueContainer currentContainer;
-    private bool inTalkingRange = false;
+    [SerializeField] private bool inTalkingRange = false;
     private bool alreadyTalking = false;
-    private bool afterUnique = false;
-    [SerializeField] private CanvasGroup npcClickTo;
-    
+
     [SerializeField] private bool talkInstant = false;
     [SerializeField] private bool uniqueDialogue; 
 
     DialogueManager isDialogueActive;
+    
+    [SerializeField] private UnityEvent inTrigger;
+    [SerializeField] private UnityEvent outTrigger;
+    
 
     public void Start()
     {
         currentContainer = initialDialogue;
-        npcClickTo.alpha = 0f;
     }
 
     public void ReplaceDialogue(DialogueContainer newDialogue)
@@ -35,7 +37,7 @@ public class DialogueNPC : MonoBehaviour
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
             dialogueManager.StartDialogueContainer(currentContainer);
             alreadyTalking = true;
-            npcClickTo.DOFade(0f, 1f);
+            outTrigger.Invoke();
         }
         else if (inTalkingRange == true && alreadyTalking == false && talkInstant == true)
         {
@@ -47,10 +49,10 @@ public class DialogueNPC : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !afterUnique)
+        if (other.CompareTag("Player"))
         {
-            npcClickTo.DOFade(1f, 1f);
             inTalkingRange = true;
+            inTrigger.Invoke();
         }
     }
     
@@ -62,22 +64,10 @@ public class DialogueNPC : MonoBehaviour
         {
             //canTalk = true;
             inTalkingRange = false;
-            npcClickTo.DOFade(0f, 1f);
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
             dialogueManager.EndDialogue();
             alreadyTalking = false;
-        }
-        if (other.CompareTag("Player") && uniqueDialogue)
-        {
-            //canTalk = true;
-            inTalkingRange = false;
-            npcClickTo.DOFade(0f, 1f);
-            DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
-            dialogueManager.EndDialogue();
-            alreadyTalking = false;
-            currentContainer = null;
-
-            afterUnique = true;
+            outTrigger.Invoke();
         }
     }
 }
