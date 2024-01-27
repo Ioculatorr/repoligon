@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
   m_Name: snail3
   m_EditorClassIdentifier: 
-  dialogueLines: 333333333333333333333333333333333333333333
-  characterSprite: {fileID: 21300000, guid: b2227358fc104bf44a403a9202dd0130, type: 3}
-  characterName: Noone
-  fontName: {fileID: 0}
+  dialogueLines: HERE?
+  characterSprite: {fileID: 21300000, guid: 7fe5fd39466f9f04da18c91c8d3cb319, type: 3}
+  characterName: hunger
+  fontName: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
   fontNameSize: 60
-  font: {fileID: 11400000, guid: 370c8901590f78d468b6ddf0a428a875, type: 2}
-  fontSize: 90
+  font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
+  fontSize: 70
   fontAnimSpeed: 0.5
   fontShake: 0
   fontShakePower: 30
   typingTalk: 1
-  typingSound: {fileID: 8300000, guid: 7324b0fc13dcc634593b980ce243819c, type: 3}
+  typingSound: {fileID: 8300000, guid: c67d3e7c9fcb6694c8cf0ca5fba78fcc, type: 3}
   typingPitch: 1
   instantTransition: 0

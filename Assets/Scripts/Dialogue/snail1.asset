@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d87e7baafd00e448845d5f11e89ba24, type: 3}
   m_Name: snail1
   m_EditorClassIdentifier: 
-  dialogueLines: 11111111111111111111111111111111111111111111111111111111
-  characterSprite: {fileID: 21300000, guid: d693cddc09c42cf46bfe00d307477a99, type: 3}
-  characterName: 
-  fontName: {fileID: 0}
+  dialogueLines: he...hey there.. my name is H-hunger.
+  characterSprite: {fileID: 21300000, guid: 7fe5fd39466f9f04da18c91c8d3cb319, type: 3}
+  characterName: ???
+  fontName: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
   fontNameSize: 60
   font: {fileID: 11400000, guid: c208a126c95432043949e5b97a716404, type: 2}
   fontSize: 36
-  fontAnimSpeed: 0.05
+  fontAnimSpeed: 0.2
   fontShake: 0
   fontShakePower: 3
   typingTalk: 1
