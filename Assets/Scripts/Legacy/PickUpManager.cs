@@ -15,6 +15,7 @@ public class PickUpManager : MonoBehaviour
     [Header("Physics Parameters")]
     [SerializeField] private float pickupRange = 5.0f;
     [SerializeField] private float pickupForce = 150.0f;
+    [SerializeField] private float maxDistanceToPlayer = 3.0f; // Maximum distance to player before automatically dropping
 
     [Header("Keybinds")]
     public KeyCode resetKey = KeyCode.Q;
@@ -52,6 +53,12 @@ public class PickUpManager : MonoBehaviour
             {
                 ThrowObject();
                 //isSmthHeld = false;
+            }
+            
+            // Check distance to player and drop if too far
+            if (Vector3.Distance(heldObj.transform.position, Player.transform.position) > maxDistanceToPlayer)
+            {
+                DropObject();
             }
         }
 

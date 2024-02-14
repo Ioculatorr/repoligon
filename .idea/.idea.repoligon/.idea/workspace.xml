@@ -11,6 +11,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Clock/SimpleClock.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interfaces/Elevator/ElevatorButton1.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interfaces/LightInterface.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RadioSignalChange.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tests/BaseWeapon.cs" root0="FORCE_HIGHLIGHTING" />
@@ -137,6 +139,7 @@
       <workItem from="1705612522233" duration="8026000" />
       <workItem from="1705653619033" duration="3873000" />
       <workItem from="1705748237722" duration="5156000" />
+      <workItem from="1707899041128" duration="15117000" />
     </task>
     <servers />
   </component>

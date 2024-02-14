@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Cinemachine;
 
 public class Headbobbing : MonoBehaviour
 {
-    [SerializeField] private Camera cameraObj;
+    [SerializeField] private GameObject cameraObj;
     [SerializeField] private Transform weaponTransform;
     [SerializeField] private float headbobFrequency = 5f;
     [SerializeField] private float headbobAmplitude = 0.1f;

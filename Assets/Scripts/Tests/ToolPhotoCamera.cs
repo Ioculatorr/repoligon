@@ -36,7 +36,7 @@ public class ToolPhotoCamera : BaseWeapon
             PhotoSound();
             PhotoReset();
             StartCoroutine(PhotoLight());
-            ReadPixelsFromRenderTexture(renderTexture);
+            StartCoroutine(ReadPixelsFromRenderTexture(renderTexture));
             canTakePhoto = false;
             
             StartCoroutine(PhotoWaitTime());
@@ -44,17 +44,21 @@ public class ToolPhotoCamera : BaseWeapon
         }
     }
     
-    void ReadPixelsFromRenderTexture(RenderTexture rt)
+    IEnumerator ReadPixelsFromRenderTexture(RenderTexture rt)
     {
         canvasPhoto.enabled = true;
 
         rawPhoto.DOFade(0, 0f);
+        
+        yield return new WaitForSeconds(0.05f);
+        
 
         // Create a new Texture2D
         Texture2D texture2D = new Texture2D(renderTexture.width, renderTexture.height);
         
         // Read the pixels from the RenderTexture into the Texture2D
         RenderTexture.active = renderTexture;
+
         texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         texture2D.Apply();
         RenderTexture.active = null;

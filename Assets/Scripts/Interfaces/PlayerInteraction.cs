@@ -17,6 +17,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void PerformRaycast()
     {
+        // Draw the raycast in the Scene view
+        Debug.DrawRay(transform.position, transform.forward * interactionRange, Color.yellow);
+        
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, interactionRange))
         {

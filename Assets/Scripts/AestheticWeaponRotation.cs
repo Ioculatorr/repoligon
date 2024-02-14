@@ -22,14 +22,14 @@ public class GunRotation : MonoBehaviour
     {
         // Get the player's movement input
         float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        //float verticalInput = Input.GetAxis("Vertical");
 
         // Get the camera's rotation input
         float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
 
         // Calculate the rotation based on both player movement and camera movement
         Vector3 targetRotation = new Vector3(
-            initialRotation.x - verticalInput * rotationAmount, // Reverse direction for player movement
+            initialRotation.x,// - verticalInput * rotationAmount, // Reverse direction for player movement
             initialRotation.y + horizontalInput * rotationAmount,
             initialRotation.z
         );

@@ -73,7 +73,7 @@ public abstract class BaseWeapon : MonoBehaviour
             if (rigidbody != null)
             {
                 // Apply a force to the Rigidbody to simulate the impact
-                float impactForce = 10f; // You can adjust this value based on your preferences
+                float impactForce = 100f; // You can adjust this value based on your preferences
                 rigidbody.AddForceAtPosition(ray.direction * impactForce, hitPoint, ForceMode.Impulse);
             }
 
