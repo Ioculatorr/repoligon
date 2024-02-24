@@ -21,6 +21,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Tests/ToolPhotoCamera.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TweenCombiner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Weapons/SimpleShooting.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.9.7/Runtime/Impulse/CinemachineImpulseSource.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -143,6 +144,8 @@
       <workItem from="1707899041128" duration="15117000" />
       <workItem from="1708030427089" duration="2201000" />
       <workItem from="1708154347462" duration="5440000" />
+      <workItem from="1708759195009" duration="12431000" />
+      <workItem from="1708783106711" duration="3779000" />
     </task>
     <servers />
   </component>

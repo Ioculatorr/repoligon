@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] private CharacterController playerMovement;
+    //[SerializeField] private CharacterController playerMovement;
     
     
     [SerializeField] private TextMeshProUGUI dialogueText;
@@ -105,7 +105,7 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(AnimateText());
         }
 
-        playerMovement.enabled = false;
+        //playerMovement.enabled = false;
     }
 
     public void ShowNextLine()
@@ -177,7 +177,7 @@ public class DialogueManager : MonoBehaviour
 
         isDialogueActive = false;
 
-        playerMovement.enabled = true;
+        //playerMovement.enabled = true;
 
     }
 

@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Events;
 
 public class FallEffects : MonoBehaviour
 {
-    [SerializeField] private CharacterController characterController;
+    [SerializeField] private GameObject player;
     [SerializeField] private Volume postProcessVolume;
 
     [SerializeField] private float minFallingSpeed = 20f;
@@ -19,9 +20,13 @@ public class FallEffects : MonoBehaviour
     private ColorAdjustments colorAdjustments; 
 
     [SerializeField] private AudioSource fallAudio;
-    [SerializeField] private GameObject fallCamera;
+    [SerializeField] private Camera fallCamera;
 
     private float intensity;
+
+    [SerializeField] private UnityEvent fallDeath;
+    
+    
 
     //private PlayerMovement boolGrounded;
     //private bool canStartCoroutine = true;
@@ -55,10 +60,9 @@ public class FallEffects : MonoBehaviour
         //    canStartCoroutine = true;
         //}
 
-
-        if (Mathf.Abs(characterController.velocity.y) >= minFallingSpeed)
+        if (!player.GetComponent<PlayerMovementNew>().grounded && (Mathf.Abs(player.GetComponent<Rigidbody>().velocity.y) >= minFallingSpeed))
         {
-            float normalizedSpeed = Mathf.InverseLerp(minFallingSpeed, maxFallingSpeed, Mathf.Abs(characterController.velocity.y));
+            float normalizedSpeed = Mathf.InverseLerp(minFallingSpeed, maxFallingSpeed, Mathf.Abs(player.GetComponent<Rigidbody>().velocity.y));
             intensity = Mathf.Lerp(minVignetteIntensity, maxVignetteIntensity, normalizedSpeed);
         }
         else

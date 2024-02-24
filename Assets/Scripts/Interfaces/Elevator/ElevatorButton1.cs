@@ -6,38 +6,23 @@ using DG.Tweening;
 
 public class ElevatorButton1 : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject platform;
     [SerializeField] private Light buttonLight;
     [SerializeField] private AudioClip clickSound;
     
-    [SerializeField] private AudioClip elevatorBell;
-    [SerializeField] private UnityEvent DoorOpen;
-    [SerializeField] private UnityEvent DoorClose;
+    [SerializeField] private UnityEvent Floor0;
     
     
     public void Interact()
     {
-        if (ElevatorInterface.isElevating == false)
-        {
-            DoorClose.Invoke();
-            this.GetComponent<AudioSource>().PlayOneShot(clickSound);
-            ElevatorInterface.isElevating = true;
-            buttonLight.enabled = true;
-            
-            platform.transform.DOMoveY(-59f, 10f)
-                .SetSpeedBased()
-                .SetDelay(1)
-                .OnComplete(ElevatorComplete);
-        }
+        this.GetComponent<AudioSource>().PlayOneShot(clickSound);
+        buttonLight.enabled = true;
+        
+        Floor0.Invoke();
     }
-
-    private void ElevatorComplete()
+    
+    public void TurnOff()
     {
         buttonLight.enabled = false;
-        ElevatorInterface.isElevating = false;
-        this.GetComponent<AudioSource>().PlayOneShot(elevatorBell);
-        
-        DoorOpen.Invoke();
     }
 }
 

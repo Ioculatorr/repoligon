@@ -11,9 +11,7 @@ public enum WeaponType
     Lamp = 2
 }
 public class SimpleShooting : MonoBehaviour
-{    
-    [SerializeField] private Transform cameraShake;
-    
+{
     [Header("Weapons")]
     
     [SerializeField] private BaseWeapon currentBaseWeapon;

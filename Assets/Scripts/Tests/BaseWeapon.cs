@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using DG.Tweening;
 using Unity.Mathematics;
 using UnityEngine;
@@ -14,6 +15,9 @@ public abstract class BaseWeapon : MonoBehaviour
     [Header("Components")]
     
     [SerializeField] private Transform shootingPointRaycast;
+
+    [SerializeField] private CinemachineImpulseSource impulseSource;
+    
     [SerializeField] private Transform cameraShake;
     [SerializeField] internal AudioSource weaponAudio;
     [SerializeField] private AudioClip suicideSound;
@@ -138,11 +142,7 @@ public abstract class BaseWeapon : MonoBehaviour
     
     internal void ShootShake()
     {
-        cameraShake.transform.DOShakeRotation(0.5f, 1.5f, 6, 15f, true)
-            .OnComplete(() =>
-            {
-                cameraShake.transform.DOLocalRotateQuaternion(Quaternion.identity, 1f);
-            });
+        impulseSource.GenerateImpulse();
     }
 
     internal void ShootShakeGun()

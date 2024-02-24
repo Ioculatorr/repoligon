@@ -82,7 +82,7 @@ public class PickUpManager : MonoBehaviour
 
     void PickupObject(GameObject pickObj)
     {
-        if (pickObj.GetComponent<Rigidbody>())
+        if (pickObj.GetComponent<Rigidbody>() && pickObj.layer == 14)
         {
             heldObjRB = pickObj.GetComponent<Rigidbody>();
             heldObjRB.useGravity = false;
