@@ -25166,19 +25166,7 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: f32a74bd9ebe40743ab7f119f4bde16d, type: 3}
   Floor1:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 187965020}
-        m_TargetAssemblyTypeName: ElevatorSystem, Assembly-CSharp
-        m_MethodName: Floor1
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!82 &373729531
 AudioSource:
   m_ObjectHideFlags: 0
@@ -34246,7 +34234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3aad45a81267e46bc68347dcf0b4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2057400201}
+  player: {fileID: 0}
   postProcessVolume: {fileID: 1160234426}
   minFallingSpeed: 15
   maxFallingSpeed: 50
@@ -34256,19 +34244,7 @@ MonoBehaviour:
   fallCamera: {fileID: 1771679383}
   fallDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 455303894}
-        m_TargetAssemblyTypeName: DeathEffects, Assembly-CSharp
-        m_MethodName: deathEffects
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!43 &651938061
 Mesh:
   m_ObjectHideFlags: 0
@@ -52028,19 +52004,7 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: f32a74bd9ebe40743ab7f119f4bde16d, type: 3}
   Floor1:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 187965020}
-        m_TargetAssemblyTypeName: ElevatorSystem, Assembly-CSharp
-        m_MethodName: Floor1
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!65 &986816588
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -63015,12 +62979,12 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 60.007, y: -2.0370002, z: -9.986}
-  - {x: 58.1546, y: -7.6752625, z: -12.134183}
-  - {x: 56.382996, y: -13.236726, z: -14.312264}
-  - {x: 54.757004, y: -18.659801, z: -16.544224}
-  - {x: 53.312576, y: -23.910313, z: -18.843367}
-  - {x: 52.049713, y: -28.988255, z: -21.209694}
-  - {x: 50.932453, y: -33.92781, z: -23.629896}
+  - {x: 58.346325, y: -7.732835, z: -12.123157}
+  - {x: 56.728474, y: -13.340467, z: -14.2923975}
+  - {x: 55.187805, y: -18.789165, z: -16.51945}
+  - {x: 53.743378, y: -24.039677, z: -18.818592}
+  - {x: 52.39519, y: -29.091997, z: -21.189825}
+  - {x: 51.12418, y: -33.985382, z: -23.618872}
   - {x: 49.896, y: -38.790565, z: -26.08}
   m_Parameters:
     serializedVersion: 3
@@ -65651,19 +65615,7 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: f32a74bd9ebe40743ab7f119f4bde16d, type: 3}
   Floor0:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 187965020}
-        m_TargetAssemblyTypeName: ElevatorSystem, Assembly-CSharp
-        m_MethodName: Floor0
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!65 &1412019848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -73182,7 +73134,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1554833066}
   - component: {fileID: 1554833069}
-  - component: {fileID: 1554833068}
   - component: {fileID: 1554833067}
   - component: {fileID: 1554833070}
   m_Layer: 0
@@ -73224,68 +73175,6 @@ MonoBehaviour:
   m_AmplitudeGain: 1
   m_FrequencyGain: 1
   mNoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!114 &1554833068
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554833065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c9beda531928fc40968802117a5d256, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RecenterTarget: 0
-  m_VerticalAxis:
-    Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
-    m_InputAxisName: Mouse Y
-    m_InputAxisValue: 0
-    m_InvertInput: 1
-    m_MinValue: -70
-    m_MaxValue: 70
-    m_Wrap: 0
-    m_Recentering:
-      m_enabled: 0
-      m_WaitTime: 1
-      m_RecenteringTime: 2
-      m_LegacyHeadingDefinition: -1
-      m_LegacyVelocityFilterStrength: -1
-  m_VerticalRecentering:
-    m_enabled: 0
-    m_WaitTime: 1
-    m_RecenteringTime: 2
-    m_LegacyHeadingDefinition: -1
-    m_LegacyVelocityFilterStrength: -1
-  m_HorizontalAxis:
-    Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
-    m_InputAxisValue: 0
-    m_InvertInput: 0
-    m_MinValue: -180
-    m_MaxValue: 180
-    m_Wrap: 1
-    m_Recentering:
-      m_enabled: 0
-      m_WaitTime: 1
-      m_RecenteringTime: 2
-      m_LegacyHeadingDefinition: -1
-      m_LegacyVelocityFilterStrength: -1
-  m_HorizontalRecentering:
-    m_enabled: 0
-    m_WaitTime: 1
-    m_RecenteringTime: 2
-    m_LegacyHeadingDefinition: -1
-    m_LegacyVelocityFilterStrength: -1
-  m_ApplyBeforeBody: 0
 --- !u!114 &1554833069
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -74589,7 +74478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: d8c77116fc409e340b27354dda0a33aa, type: 2}
   shootingPointRaycast: {fileID: 1654323542}
-  impulseSource: {fileID: 1627492155}
+  impulseSource: {fileID: 0}
   cameraShake: {fileID: 0}
   weaponAudio: {fileID: 1627492154}
   suicideSound: {fileID: 8300000, guid: 634bcbbd2175cdb43b128542cd551361, type: 3}
@@ -81360,19 +81249,7 @@ MonoBehaviour:
   clickSound: {fileID: 8300000, guid: f32a74bd9ebe40743ab7f119f4bde16d, type: 3}
   Floor0:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 187965020}
-        m_TargetAssemblyTypeName: ElevatorSystem, Assembly-CSharp
-        m_MethodName: Floor0
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!82 &1770349266
 AudioSource:
   m_ObjectHideFlags: 0
@@ -105583,7 +105460,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  fallDeathSpeed: 200
+  fallDeathSpeed: 20
 --- !u!114 &2057400213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108161,7 +108038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2f69709b404ec4381d454f3632e5b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2057400201}
+  player: {fileID: 0}
   cameraTransform: {fileID: 1771679377}
   rotationAmount: 25
   rotationSpeed: 20
